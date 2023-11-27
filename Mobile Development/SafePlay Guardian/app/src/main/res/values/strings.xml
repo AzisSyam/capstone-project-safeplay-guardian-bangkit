@@ -23,4 +23,6 @@
   <string name="edit">Edit</string>
   <string name="command_to_log_in_profile">Masuk terlebih dahulu</string>
   <string name="save">Simpan</string>
+  <string name="password">Password</string>
+  <string name="create_account">Buat akun</string>
 </resources>

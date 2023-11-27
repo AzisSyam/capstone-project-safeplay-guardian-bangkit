@@ -51,13 +51,13 @@
     android:text="@string/login_command"
     android:textAlignment="center"
     android:textSize="16sp"
-    app:layout_constraintBottom_toTopOf="@+id/button"
+    app:layout_constraintBottom_toTopOf="@+id/guideline_vertical_center"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintHorizontal_bias="0.0"
     app:layout_constraintStart_toStartOf="parent" />
 
   <Button
-    android:id="@+id/button"
+    android:id="@+id/btn_to_login"
     style="@style/ButtonStyleFilled"
     android:layout_width="88dp"
     android:layout_height="48dp"
