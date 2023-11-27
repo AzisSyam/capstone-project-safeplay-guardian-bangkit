@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  tools:context=".ui.editprofile.EditProfileActivity">
+
+  <com.google.android.material.appbar.AppBarLayout
+    android:id="@+id/appBarLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent">
+
+    <com.google.android.material.appbar.MaterialToolbar
+      android:id="@+id/topAppBar"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:background="?attr/colorPrimary"
+      app:navigationIcon="@drawable/baseline_keyboard_backspace_24"
+      app:navigationIconTint="@color/white"
+      app:title="@string/edit_profile"
+      app:titleTextColor="@color/white" />
+  </com.google.android.material.appbar.AppBarLayout>
+
+  <ImageView
+    android:id="@+id/profile_photo"
+    android:layout_width="187dp"
+    android:layout_height="187dp"
+    android:src="@drawable/user"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/appBarLayout"
+    app:layout_constraintVertical_bias="0.2"
+    tools:srcCompat="@tools:sample/avatars" />
+
+  <Button
+    android:id="@+id/btn_camera"
+    style="@style/Widget.Material3.Button.IconButton.Filled"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:icon="@drawable/baseline_camera_alt_38"
+    app:layout_constraintBottom_toBottomOf="@id/profile_photo"
+    app:layout_constraintEnd_toEndOf="@id/profile_photo" />
+
+  <TextView
+    android:id="@+id/tv_label_name"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="32dp"
+    android:layout_marginTop="32dp"
+    android:layout_marginEnd="32dp"
+    android:text="@string/name"
+    android:textSize="16sp"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/profile_photo" />
+
+  <com.google.android.material.textfield.TextInputLayout
+    android:id="@+id/nameEditTextLayout"
+    style="@style/TextField.StartIcon"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="32dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginEnd="32dp"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/tv_label_name"
+    app:startIconDrawable="@drawable/baseline_person_outline_24"
+    tools:alpha="100">
+
+    <com.google.android.material.textfield.TextInputEditText
+      android:id="@+id/et_name"
+      style="@style/TextAppearance.AppCompat.TextField.TextColor"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:textSize="16sp"
+      android:ems="10"
+      android:inputType="text"
+      tools:text="@string/name" />
+  </com.google.android.material.textfield.TextInputLayout>
+
+  <TextView
+    android:id="@+id/tv_label_email"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="32dp"
+    android:layout_marginTop="16dp"
+    android:layout_marginEnd="32dp"
+    android:text="@string/email"
+    android:textSize="16sp"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/nameEditTextLayout" />
+
+  <com.google.android.material.textfield.TextInputLayout
+    android:id="@+id/emailEditTextLayout"
+    style="@style/TextField.StartIcon"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="32dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginEnd="32dp"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/tv_label_email"
+    app:startIconDrawable="@drawable/outline_email_24"
+    tools:alpha="100">
+
+    <com.google.android.material.textfield.TextInputEditText
+      android:id="@+id/ed_email"
+      style="@style/TextAppearance.AppCompat.TextField.TextColor"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:textSize="16sp"
+      android:ems="10"
+      android:inputType="textEmailAddress"
+      tools:text="@string/email" />
+  </com.google.android.material.textfield.TextInputLayout>
+
+  <Button
+    android:id="@+id/button"
+    android:layout_width="0dp"
+    android:layout_height="48dp"
+    android:layout_marginStart="32dp"
+    android:layout_marginTop="16dp"
+    style="@style/ButtonStyleFilled"
+    android:layout_marginEnd="32dp"
+    android:text="@string/save"
+    android:visibility="visible"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/emailEditTextLayout" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
