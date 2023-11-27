@@ -1,0 +1,26 @@
+<resources>
+  <string name="app_name">SafePlay Guardian</string>
+  <string name="welcome_screen_illustrarion">ilustrasi halaman welcome</string>
+  <string name="welcome_text">Bersiaplah untuk petualangan aman bersama mainan. Temukan info keamanan mainan di ujung jari Anda. Selamat bersenang-senang dengan tenang!</string>
+  <string name="safeplay_guardian">SafePlay Guardian</string>
+  <string name="start">Mulai</string>
+  <string name="home_hello">Hello 👋</string>
+  <string name="login">Masuk</string>
+  <string name="recomendation">Rekomendasi</string>
+  <string name="upload_info"><![CDATA[* Untuk mendapatkan hasil yang lebih akurat silahkan upload gambar yang hanya berisi satu objek mainan]]></string>
+  <string name="galeri">Galeri</string>
+  <string name="camera">Kamera</string>
+  <string name="check">Cek</string>
+  <string name="result">Hasil</string>
+  <string name="toys_name_example">Slime</string>
+  <string name="toys_desc_example">Slime adalah mainan yang terbuat dari bahan-bahan seperti lem, air, pewarna makanan, dan boraks. Slime memiliki tekstur yang kenyal, lentur, dan licin. Slime bisa dimainkan dengan cara ditarik, dipencet, dibentuk, atau dicampur dengan benda-benda lain seperti manik-manik atau glitter.</string>
+  <string name="recomendation_heading">Rekomendasi</string>
+  <string name="login_command">Masuk untuk melihat rekomendasi mainan</string>
+  <string name="profile">Profil</string>
+  <string name="name">Nama</string>
+  <string name="email">Email</string>
+  <string name="edit_profile">Edit Profil</string>
+  <string name="edit">Edit</string>
+  <string name="command_to_log_in_profile">Masuk terlebih dahulu</string>
+  <string name="save">Simpan</string>
+</resources>
