@@ -34,8 +34,9 @@
 
   <style name="Theme.SafePlayGuardian" parent="Base.Theme.SafePlayGuardian" />
 
-  <style name="TextField.StartIcon" parent="Widget.Material3.TextInputLayout.OutlinedBox">
+  <style name="TextField.Icon" parent="Widget.Material3.TextInputLayout.OutlinedBox">
     <item name="startIconTint">?attr/colorOutline</item>
+    <item name="endIconTint">?attr/colorOutline</item>
   </style>
 
   <style name="TextAppearance.AppCompat.TextField.TextColor" parent="@style/TextAppearance.AppCompat">
