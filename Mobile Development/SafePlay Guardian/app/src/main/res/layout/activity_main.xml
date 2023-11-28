@@ -102,18 +102,18 @@
           android:backgroundTint="?attr/colorSecondaryContainer"
           android:text="@string/galeri"
           android:textColor="@color/white"
-          app:layout_constraintStart_toStartOf="@+id/tv_upload_info"
+          app:layout_constraintEnd_toEndOf="@+id/tv_upload_info"
           app:layout_constraintTop_toBottomOf="@+id/tv_upload_info" />
 
         <Button
           android:id="@+id/btn_kamera"
-          style="@style/Widget.Material3.Button.TonalButton"
+          style="@style/Widget.Material3.Button.TonalButton.Icon"
           android:layout_width="140dp"
           android:layout_height="48dp"
           android:layout_marginTop="16dp"
           android:text="@string/camera"
           android:textColor="@color/white"
-          app:layout_constraintEnd_toEndOf="@+id/tv_upload_info"
+          app:layout_constraintStart_toStartOf="@+id/tv_upload_info"
           app:layout_constraintTop_toBottomOf="@+id/tv_upload_info" />
 
         <Button
