@@ -4,26 +4,7 @@
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  tools:context=".ui.editprofile.EditProfileActivity">
-
-  <com.google.android.material.appbar.AppBarLayout
-    android:id="@+id/appBarLayout"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent">
-
-    <com.google.android.material.appbar.MaterialToolbar
-      android:id="@+id/topAppBar"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:background="?attr/colorPrimary"
-      app:navigationIcon="@drawable/baseline_keyboard_backspace_24"
-      app:navigationIconTint="@color/white"
-      app:title="@string/edit_profile"
-      app:titleTextColor="@color/white" />
-  </com.google.android.material.appbar.AppBarLayout>
+  tools:context=".ui.signup.SignUpActivity">
 
   <ImageView
     android:id="@+id/profile_photo"
@@ -33,9 +14,8 @@
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@id/appBarLayout"
-    app:layout_constraintVertical_bias="0.2"
-    tools:srcCompat="@tools:sample/avatars" />
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintVertical_bias="0.15" />
 
   <Button
     android:id="@+id/btn_camera"
@@ -117,24 +97,64 @@
       style="@style/TextAppearance.AppCompat.TextField.TextColor"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:textSize="16sp"
       android:ems="10"
       android:inputType="textEmailAddress"
+      android:textSize="16sp"
+      tools:text="@string/email" />
+  </com.google.android.material.textfield.TextInputLayout>
+
+  <TextView
+    android:id="@+id/tv_label_password"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="32dp"
+    android:layout_marginTop="16dp"
+    android:layout_marginEnd="32dp"
+    android:text="@string/password"
+    android:textSize="16sp"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/emailEditTextLayout" />
+
+  <com.google.android.material.textfield.TextInputLayout
+    android:id="@+id/passwordEditTextLayout"
+    style="@style/TextField.Icon"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="32dp"
+    android:layout_marginTop="4dp"
+    android:layout_marginEnd="32dp"
+    app:endIconMode="password_toggle"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/tv_label_password"
+    app:startIconDrawable="@drawable/outline_lock_24"
+    tools:alpha="100">
+
+    <com.google.android.material.textfield.TextInputEditText
+      android:id="@+id/ed_password"
+      style="@style/TextAppearance.AppCompat.TextField.TextColor"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:ems="10"
+      android:inputType="textPassword"
+      android:textSize="16sp"
       tools:text="@string/email" />
   </com.google.android.material.textfield.TextInputLayout>
 
   <Button
-    android:id="@+id/button_save"
+    android:id="@+id/btn_login"
+    style="@style/ButtonStyleFilled"
     android:layout_width="0dp"
     android:layout_height="48dp"
     android:layout_marginStart="32dp"
     android:layout_marginTop="16dp"
-    style="@style/ButtonStyleFilled"
     android:layout_marginEnd="32dp"
-    android:text="@string/save"
+    android:text="@string/signup"
     android:visibility="visible"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@id/emailEditTextLayout" />
+    app:layout_constraintTop_toBottomOf="@id/passwordEditTextLayout" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -35,9 +35,9 @@
 
   <Button
     android:id="@+id/btn_start"
+    style="@style/ButtonStyleFilled"
     android:layout_width="88dp"
     android:layout_height="wrap_content"
-    style="@style/ButtonStyleFilled"
     android:text="@string/start" />
 
 </LinearLayout>
