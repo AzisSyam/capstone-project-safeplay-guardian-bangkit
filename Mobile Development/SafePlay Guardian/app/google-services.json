@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "633057844845",
+    "project_id": "safeplay-guardian-test",
+    "storage_bucket": "safeplay-guardian-test.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:633057844845:android:61a9e7a88523b6a4bba964",
+        "android_client_info": {
+          "package_name": "com.example.safeplayguardian"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDmPaDcsWTTXv9gFXTiN5egJkJxn7fTXc8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

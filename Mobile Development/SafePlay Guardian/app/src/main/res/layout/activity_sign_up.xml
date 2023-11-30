@@ -93,7 +93,7 @@
     tools:alpha="100">
 
     <com.google.android.material.textfield.TextInputEditText
-      android:id="@+id/ed_email"
+      android:id="@+id/et_email"
       style="@style/TextAppearance.AppCompat.TextField.TextColor"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
@@ -132,7 +132,7 @@
     tools:alpha="100">
 
     <com.google.android.material.textfield.TextInputEditText
-      android:id="@+id/ed_password"
+      android:id="@+id/et_password"
       style="@style/TextAppearance.AppCompat.TextField.TextColor"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
@@ -143,7 +143,7 @@
   </com.google.android.material.textfield.TextInputLayout>
 
   <Button
-    android:id="@+id/btn_login"
+    android:id="@+id/btn_register"
     style="@style/ButtonStyleFilled"
     android:layout_width="0dp"
     android:layout_height="48dp"
@@ -155,6 +155,23 @@
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@id/passwordEditTextLayout" />
+
+  <Button
+    android:id="@+id/btn_login_google"
+    style="@style/Widget.Material3.Button.OutlinedButton"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="32dp"
+    android:layout_marginTop="8dp"
+    android:textColor="?attr/colorSurfaceInverse"
+    android:text="@string/google"
+    app:icon="@drawable/google"
+    app:iconGravity="textStart"
+    app:iconSize="17dp"
+    app:iconTint="@null"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/btn_register" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

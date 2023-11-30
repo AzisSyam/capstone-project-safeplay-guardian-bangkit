@@ -4,6 +4,7 @@
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
+  android:layout_gravity="center_vertical"
   tools:context=".ui.login.LoginActivity">
 
   <ImageView
@@ -93,7 +94,6 @@
 
   <Button
     android:id="@+id/btn_login"
-    style="@style/ButtonStyleFilled"
     android:layout_width="0dp"
     android:layout_height="48dp"
     android:layout_marginStart="32dp"
@@ -105,18 +105,36 @@
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@id/passwordEditTextLayout" />
 
+  <Button
+    android:id="@+id/btn_login_google"
+    style="@style/Widget.Material3.Button.OutlinedButton"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="32dp"
+    android:layout_marginTop="8dp"
+    android:textColor="?attr/colorSurfaceInverse"
+    android:text="@string/google"
+    app:icon="@drawable/google"
+    app:iconGravity="textStart"
+    app:iconSize="17dp"
+    app:iconTint="@null"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/btn_login" />
+
+
   <TextView
     android:id="@+id/tv_to_signup"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="16dp"
+    android:layout_marginTop="8dp"
     android:text="@string/create_account"
     android:textAlignment="center"
     android:textColor="@color/blue_primary"
     android:textSize="16sp"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@id/btn_login" />
+    app:layout_constraintTop_toBottomOf="@+id/btn_login_google" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

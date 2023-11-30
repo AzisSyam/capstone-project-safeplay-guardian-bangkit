@@ -3,6 +3,7 @@
   xmlns:tools="http://schemas.android.com/tools">
 
   <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+  <uses-permission android:name="android.permission.INTERNET"/>
 
   <application
     android:allowBackup="true"
@@ -35,6 +36,7 @@
       android:theme="@style/Base.Theme.SafePlayGuardian.NoactionBar" />
     <activity
       android:name=".ui.SplashScreenActivity"
+      android:theme="@style/SplashscreenNavigationColor"
       android:exported="true">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />

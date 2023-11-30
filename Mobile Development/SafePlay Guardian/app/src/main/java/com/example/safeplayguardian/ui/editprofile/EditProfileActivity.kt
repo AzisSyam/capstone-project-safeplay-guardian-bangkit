@@ -9,7 +9,6 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.safeplayguardian.R
 import com.example.safeplayguardian.databinding.ActivityEditProfileBinding
-import com.example.safeplayguardian.ui.signup.ModalBottomSheet
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class EditProfileActivity : AppCompatActivity() {

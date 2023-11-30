@@ -1,54 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
-  android:layout_width="wrap_content"
+  android:layout_width="match_parent"
   android:layout_height="wrap_content"
-  android:padding="16dp"
-  tools:context=".DetailToyFragment">
-
+  android:maxWidth="330dp"
+  android:orientation="vertical"
+  tools:context=".ui.recomendation.DetailToyFragment">
   <ImageView
     android:id="@+id/toy_image_detail"
     android:layout_width="330dp"
     android:layout_height="330dp"
     android:layout_gravity="center"
     android:scaleType="centerCrop"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent"
     app:srcCompat="@drawable/welcome_illustration"
     tools:srcCompat="@drawable/welcome_illustration" />
-
-  <ImageView
-    android:id="@+id/btn_close"
-    android:layout_width="32dp"
-    android:layout_height="32dp"
-    android:src="@drawable/close"
-    app:layout_constraintEnd_toEndOf="@id/toy_image_detail"
-    app:layout_constraintTop_toTopOf="@id/toy_image_detail" />
 
   <TextView
     android:id="@+id/tv_toy_name_detail"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="16dp"
+    android:layout_marginHorizontal="16dp"
+    android:text="@string/toys_name_example"
     android:textSize="16sp"
     android:textStyle="bold"
-    android:text="@string/toys_name_example"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@id/toy_image_detail"
     tools:text="@string/toys_name_example" />
 
   <TextView
     android:id="@+id/tv_toy_desc_detail"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginHorizontal="16dp"
     android:layout_marginTop="8dp"
     android:layout_marginBottom="16dp"
-    android:textSize="16sp"
     android:text="@string/toys_desc_example"
-    app:layout_constraintStart_toStartOf="@id/tv_toy_name_detail"
-    app:layout_constraintTop_toBottomOf="@id/tv_toy_name_detail"
+    android:textSize="16sp"
     tools:text="@string/toys_desc_example" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
