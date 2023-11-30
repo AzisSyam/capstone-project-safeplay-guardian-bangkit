@@ -27,8 +27,12 @@
   <string name="create_account">Buat akun</string>
   <string name="signup">Daftar</string>
   <string name="profile_photo">Foto Profil</string>
+  <string name="retry">Coba Lagi</string>
+  <string name="google">Google</string>
+  <string name="password_length_alert">Password tidak boleh kurang dari 8 karakter</string>
+  <string name="form_empty_message">Nama, Email, dan Password tidak boleh kosong</string>
   <!-- TODO: Remove or change this placeholder text -->
-  <string name="hello_blank_fragment">Hello blank fragment</string>
+  <!--<string name="hello_blank_fragment">Hello blank fragment</string>
   <string name="large_text">
     "Material is the metaphor.\n\n"
 
@@ -117,5 +121,5 @@
     "On the layout level, design your app layout to minimize opportunities for interference. "
     "For example, position the FAB to one side of stream of a cards so the FAB won’t interfere "
     "when a user tries to pick up one of cards.\n\n"
-  </string>
+  </string>-->
 </resources>

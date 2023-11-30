@@ -8,6 +8,7 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import com.example.safeplayguardian.R
 import com.example.safeplayguardian.databinding.ActivityMainBinding
+import com.example.safeplayguardian.ui.login.LoginActivity
 import com.example.safeplayguardian.ui.profile.ProfileActivity
 import com.example.safeplayguardian.ui.recomendation.RecomendationActivity
 
@@ -22,6 +23,11 @@ class MainActivity : AppCompatActivity() {
 
       binding.btnRecomendation.setOnClickListener {
          val intent = Intent(this@MainActivity, RecomendationActivity::class.java)
+         startActivity(intent)
+      }
+
+      binding.btnLogin.setOnClickListener {
+         val intent = Intent(this@MainActivity, LoginActivity::class.java)
          startActivity(intent)
       }
 

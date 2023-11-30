@@ -1,12 +1,24 @@
 package com.example.safeplayguardian.ui.recomendation
 
 import android.os.Bundle
+import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import com.example.safeplayguardian.DetailToyFragment
+import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.safeplayguardian.ViewModelVactory
 import com.example.safeplayguardian.databinding.ActivityRecomendationBinding
+import com.example.safeplayguardian.remote.response.ListToyItem
+import com.example.safeplayguardian.ui.adapter.ToysAdapter
+import kotlinx.coroutines.launch
+import retrofit2.HttpException
 
 class RecomendationActivity : AppCompatActivity() {
    private lateinit var binding: ActivityRecomendationBinding
+   private val viewModel: ToyRecomendationViewModel by viewModels {
+      ViewModelVactory.getInstance(this)
+   }
+
    override fun onCreate(savedInstanceState: Bundle?) {
       super.onCreate(savedInstanceState)
       binding = ActivityRecomendationBinding.inflate(layoutInflater)
@@ -16,35 +28,51 @@ class RecomendationActivity : AppCompatActivity() {
          onBackPressed()
       }
 
-      binding.btnToLogin.setOnClickListener {
-//         val intent = Intent(this@RecomendationActivity, LoginActivity::class.java)
-//         startActivity(intent)
+      binding.rvStories.layoutManager = LinearLayoutManager(this)
 
-//         val fragmentManager = supportFragmentManager
-//         val DetailToyFragment = DetailToyFragment()
-//         val fragment = fragmentManager.findFragmentByTag(DetailToyFragment::class.java.simpleName)
-//         if (fragment !is DetailToyFragment) {
-//            Log.d(
-//               "MyFlexibleFragment",
-//               "Fragment Name :" + DetailToyFragment::class.java.simpleName
-//            )
-//            fragmentManager
-//               .beginTransaction()
-//               .add(
-//                  R.id.recomendation_activity,
-//                  DetailToyFragment,
-//                  DetailToyFragment::class.java.simpleName
-//               )
-//               .commit()
-//         }
-         val fragmentManager = supportFragmentManager
-         val transaction = fragmentManager.beginTransaction()
-
-         // Buat instance dari MyDialogFragment
-         val dialogFragment = DetailToyFragment()
-
-         // Tampilkan DialogFragment
-         dialogFragment.show(transaction, "my_dialog_fragment")
+      try {
+         //      recyclerView
+         lifecycleScope.launch {
+            viewModel.getRecomendation()
+            viewModel.toyItem.observe(this@RecomendationActivity, { data ->
+               val adapter = ToysAdapter(data) { selectedToy ->
+                  showDetailDialog(selectedToy)
+               }
+               adapter.submitList(data)
+               binding.rvStories.adapter = adapter
+            })
+         }
+      }catch (e:HttpException){
+         Toast.makeText(this, e.message(), Toast.LENGTH_LONG).show()
       }
+
+
+//      paging 3
+//      setupListToy()
    }
+
+   //   dialod fragment detail mainan
+   private fun showDetailDialog(toy: ListToyItem) {
+      val detailDialog = DetailToyFragment.newInstance(toy)
+      detailDialog.show(supportFragmentManager, "ToyDetailDialog")
+   }
+
+//   paging 3
+   /*
+      fun setupListToy() {
+         val adapter = ToysAdapter()
+         binding.rvStories.adapter = adapter.withLoadStateFooter(
+            footer = LoadingStateAdapter {
+               adapter.retry()
+            }
+         )
+         viewModel.toyItem.observe(this, {
+            adapter.submitData(lifecycle, it)
+         })
+
+         viewModel.toyItem.observe(this,{
+            Log.d("toyItemData", "toyItem: ${it}")
+         })
+      }
+   */
 }
