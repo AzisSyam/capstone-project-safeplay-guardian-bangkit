@@ -2,51 +2,74 @@ package com.example.safeplayguardian.ui.main
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import com.example.safeplayguardian.R
+import com.bumptech.glide.Glide
 import com.example.safeplayguardian.databinding.ActivityMainBinding
+import com.example.safeplayguardian.remote.response.UserResponse
 import com.example.safeplayguardian.ui.login.LoginActivity
 import com.example.safeplayguardian.ui.profile.ProfileActivity
 import com.example.safeplayguardian.ui.recomendation.RecomendationActivity
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 class MainActivity : AppCompatActivity() {
    private lateinit var binding: ActivityMainBinding
+   private lateinit var firebaseAuth: FirebaseAuth
+   private lateinit var userPhotoUrl: String
+
    override fun onCreate(savedInstanceState: Bundle?) {
       super.onCreate(savedInstanceState)
       binding = ActivityMainBinding.inflate(layoutInflater)
       setContentView(binding.root)
-
-      supportActionBar?.setBackgroundDrawable(resources.getDrawable(R.color.blue_primary))
 
       binding.btnRecomendation.setOnClickListener {
          val intent = Intent(this@MainActivity, RecomendationActivity::class.java)
          startActivity(intent)
       }
 
-      binding.btnLogin.setOnClickListener {
-         val intent = Intent(this@MainActivity, LoginActivity::class.java)
+      binding.userPhoto.setOnClickListener {
+         val intent = Intent(this, ProfileActivity::class.java)
          startActivity(intent)
       }
 
-   }
+      firebaseAuth = Firebase.auth
+      val firebaseUser = firebaseAuth.currentUser
 
-   //   menu
-   override fun onCreateOptionsMenu(menu: Menu): Boolean {
-      val inflater: MenuInflater = menuInflater
-      inflater.inflate(R.menu.main_activity_menu, menu)
-      return true
-   }
-
-   override fun onOptionsItemSelected(item: MenuItem): Boolean {
-      when (item.itemId) {
-         R.id.menu_profile -> {
-            val intent = Intent(this@MainActivity, ProfileActivity::class.java)
-            startActivity(intent)
-         }
+//      mengambil session
+      if (firebaseUser == null) {
+         // Not signed in, launch the Login activity
+         startActivity(Intent(this, LoginActivity::class.java))
+         finish()
+         return
       }
-      return true
+
+//      mengambil data dari firebase dan update beberapa UI
+      val db = Firebase.firestore
+      val docRef = db.collection("users").document(firebaseUser.uid)
+      docRef.get()
+         .addOnSuccessListener { document ->
+            if (document.exists()) {
+               val user = document.toObject(UserResponse::class.java)
+               if (user != null) {
+                  userPhotoUrl = user.photoUrl.toString()
+               }
+
+//               mengatur foto profil pengguna menggunakan data dari firebase
+               Glide.with(binding.userPhoto).load(userPhotoUrl).circleCrop()
+                  .into(binding.userPhoto)
+            } else {
+               Log.d(TAG, "No such document")
+            }
+         }
+         .addOnFailureListener { exception ->
+            Log.d(TAG, "get failed with ", exception)
+         }
+   }
+
+   companion object {
+      private const val TAG = "MainActivity"
    }
 }
