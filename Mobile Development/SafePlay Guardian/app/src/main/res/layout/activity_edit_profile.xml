@@ -18,11 +18,9 @@
       android:id="@+id/topAppBar"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:background="?attr/colorPrimary"
       app:navigationIcon="@drawable/baseline_keyboard_backspace_24"
-      app:navigationIconTint="@color/white"
       app:title="@string/edit_profile"
-      app:titleTextColor="@color/white" />
+      app:titleCentered="true" />
   </com.google.android.material.appbar.AppBarLayout>
 
   <ImageView
@@ -117,19 +115,19 @@
       style="@style/TextAppearance.AppCompat.TextField.TextColor"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:textSize="16sp"
       android:ems="10"
       android:inputType="textEmailAddress"
+      android:textSize="16sp"
       tools:text="@string/email" />
   </com.google.android.material.textfield.TextInputLayout>
 
   <Button
     android:id="@+id/button_save"
+    style="@style/ButtonStyleFilled"
     android:layout_width="0dp"
     android:layout_height="48dp"
     android:layout_marginStart="32dp"
     android:layout_marginTop="16dp"
-    style="@style/ButtonStyleFilled"
     android:layout_marginEnd="32dp"
     android:text="@string/save"
     android:visibility="visible"

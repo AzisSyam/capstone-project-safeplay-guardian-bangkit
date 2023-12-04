@@ -1,21 +1,23 @@
 package com.example.safeplayguardian.ui.recomendation
 
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.safeplayguardian.R
 import com.example.safeplayguardian.ViewModelVactory
 import com.example.safeplayguardian.databinding.ActivityRecomendationBinding
 import com.example.safeplayguardian.remote.response.ListToyItem
 import com.example.safeplayguardian.ui.adapter.ToysAdapter
-import kotlinx.coroutines.launch
+import com.example.safeplayguardian.utils.isNetworkAvailable
+import com.google.android.material.snackbar.Snackbar
 import retrofit2.HttpException
 
 class RecomendationActivity : AppCompatActivity() {
    private lateinit var binding: ActivityRecomendationBinding
-   private val viewModel: ToyRecomendationViewModel by viewModels {
+   private val viewModel: RecomendationViewModel by viewModels {
       ViewModelVactory.getInstance(this)
    }
 
@@ -24,16 +26,33 @@ class RecomendationActivity : AppCompatActivity() {
       binding = ActivityRecomendationBinding.inflate(layoutInflater)
       setContentView(binding.root)
 
+      setupView()
+      setupAction()
+   }
+
+   private fun setupView() {
       binding.topAppBar.setNavigationOnClickListener {
          onBackPressed()
       }
 
       binding.rvStories.layoutManager = LinearLayoutManager(this)
+   }
 
-      try {
-         //      recyclerView
-         lifecycleScope.launch {
+   private fun setupAction() {
+      getData()
+      binding.btnRetry.setOnClickListener {
+         getData()
+      }
+   }
+
+   private fun getData() {
+      if (isNetworkAvailable(this)) {
+         try {
+            //      recyclerView
             viewModel.getRecomendation()
+            viewModel.isLoading.observe(this, {
+               showLoading(it)
+            })
             viewModel.toyItem.observe(this@RecomendationActivity, { data ->
                val adapter = ToysAdapter(data) { selectedToy ->
                   showDetailDialog(selectedToy)
@@ -41,14 +60,19 @@ class RecomendationActivity : AppCompatActivity() {
                adapter.submitList(data)
                binding.rvStories.adapter = adapter
             })
+            binding.tvToyNotFound.visibility = View.GONE
+            binding.btnRetry.visibility = View.GONE
+         } catch (e: HttpException) {
+            Toast.makeText(this, e.message(), Toast.LENGTH_LONG).show()
          }
-      }catch (e:HttpException){
-         Toast.makeText(this, e.message(), Toast.LENGTH_LONG).show()
+      } else {
+         val contextView = findViewById<View>(R.id.recomendation_activity)
+         Snackbar.make(contextView, "Tidak ada internet", Snackbar.LENGTH_SHORT)
+            .show()
+         showLoading(false)
+         binding.tvToyNotFound.visibility = View.VISIBLE
+         binding.btnRetry.visibility = View.VISIBLE
       }
-
-
-//      paging 3
-//      setupListToy()
    }
 
    //   dialod fragment detail mainan
@@ -57,22 +81,9 @@ class RecomendationActivity : AppCompatActivity() {
       detailDialog.show(supportFragmentManager, "ToyDetailDialog")
    }
 
-//   paging 3
-   /*
-      fun setupListToy() {
-         val adapter = ToysAdapter()
-         binding.rvStories.adapter = adapter.withLoadStateFooter(
-            footer = LoadingStateAdapter {
-               adapter.retry()
-            }
-         )
-         viewModel.toyItem.observe(this, {
-            adapter.submitData(lifecycle, it)
-         })
+   //   menampilkan progress bar
+   private fun showLoading(isLoading: Boolean?) {
+      binding.progressHorizontal.visibility = if (isLoading!!) View.VISIBLE else View.GONE
+   }
 
-         viewModel.toyItem.observe(this,{
-            Log.d("toyItemData", "toyItem: ${it}")
-         })
-      }
-   */
 }

@@ -20,6 +20,7 @@
     <item name="colorAccent">@color/white</item>
     <item name="colorOnSurface">@color/white</item>
     <item name="colorOnSurfaceVariant">@color/white</item>
+    <item name="background">@color/white</item>
   </style>
 
   <style name="SplashscreenNavigationColor" parent="Base.Theme.SafePlayGuardian.NoactionBar">

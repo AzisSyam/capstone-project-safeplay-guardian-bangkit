@@ -14,7 +14,7 @@
   <string name="result">Hasil</string>
   <string name="toys_name_example">Slime</string>
   <string name="toys_desc_example">Slime adalah mainan yang terbuat dari bahan-bahan seperti lem, air, pewarna makanan, dan boraks. Slime memiliki tekstur yang kenyal, lentur, dan licin. Slime bisa dimainkan dengan cara ditarik, dipencet, dibentuk, atau dicampur dengan benda-benda lain seperti manik-manik atau glitter.</string>
-  <string name="recomendation_heading">Rekomendasi</string>
+  <string name="recomendation_heading">Rekomendasi mainan</string>
   <string name="login_command">Masuk untuk melihat rekomendasi mainan</string>
   <string name="profile">Profil</string>
   <string name="name">Nama</string>
@@ -30,7 +30,10 @@
   <string name="retry">Coba Lagi</string>
   <string name="google">Google</string>
   <string name="password_length_alert">Password tidak boleh kurang dari 8 karakter</string>
-  <string name="form_empty_message">Nama, Email, dan Password tidak boleh kosong</string>
+  <string name="form_empty_message">Form tidak boleh kosong</string>
+  <string name="logout">Keluar</string>
+  <string name="upload_image_here">Upload gambar disini</string>
+  <string name="toy_not_found">Tidak dapat menampilkan rekomendasi mainan</string>
   <!-- TODO: Remove or change this placeholder text -->
   <!--<string name="hello_blank_fragment">Hello blank fragment</string>
   <string name="large_text">

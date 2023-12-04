@@ -6,9 +6,10 @@
   android:layout_height="match_parent"
   tools:context=".ui.signup.SignUpActivity">
 
-  <ImageView
+  <de.hdodenhof.circleimageview.CircleImageView
     android:id="@+id/profile_photo"
     android:layout_width="187dp"
+    android:scaleType="centerCrop"
     android:layout_height="187dp"
     android:src="@drawable/user"
     app:layout_constraintBottom_toBottomOf="parent"
