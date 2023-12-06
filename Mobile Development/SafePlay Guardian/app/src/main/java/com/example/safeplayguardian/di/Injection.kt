@@ -1,14 +1,24 @@
 package com.example.safeplayguardian.di
 
 import android.content.Context
-import com.example.safeplayguardian.data.pref.Repository
+import com.example.safeplayguardian.data.pref.UserPreferences
+import com.example.safeplayguardian.data.pref.dataStore
+import com.example.safeplayguardian.data.repository.ToyRepository
+import com.example.safeplayguardian.data.repository.UserRepository
 import com.example.safeplayguardian.remote.api.ApiConfig
 
 object Injection {
-   fun provideRepository(context: Context): Repository {
+   fun provideToyRepository(context: Context): ToyRepository {
 //      val pref = UserPreference.getInstance(context.dataStore)
 //      val user = runBlocking { pref.getUserSession().first() }
       val apiService = ApiConfig.getApiService()
-      return Repository(apiService)
+      return ToyRepository(apiService)
+   }
+
+   fun provideUserRepository(context: Context): UserRepository {
+//      val pref = UserPreference.getInstance(context.dataStore)
+//      val user = runBlocking { pref.getUserSession().first() }
+      val pref = UserPreferences.getInstance(context.dataStore)
+      return UserRepository(pref)
    }
 }

@@ -145,9 +145,8 @@
 
   <Button
     android:id="@+id/btn_register"
-    style="@style/ButtonStyleFilled"
     android:layout_width="0dp"
-    android:layout_height="48dp"
+    android:layout_height="56dp"
     android:layout_marginStart="32dp"
     android:layout_marginTop="16dp"
     android:layout_marginEnd="32dp"
@@ -157,22 +156,22 @@
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@id/passwordEditTextLayout" />
 
-  <Button
-    android:id="@+id/btn_login_google"
-    style="@style/Widget.Material3.Button.OutlinedButton"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginHorizontal="32dp"
-    android:layout_marginTop="8dp"
-    android:textColor="?attr/colorSurfaceInverse"
-    android:text="@string/google"
-    app:icon="@drawable/google"
-    app:iconGravity="textStart"
-    app:iconSize="17dp"
-    app:iconTint="@null"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@id/btn_register" />
+<!--  <Button-->
+<!--    android:id="@+id/btn_login_google"-->
+<!--    style="@style/Widget.Material3.Button.OutlinedButton"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="wrap_content"-->
+<!--    android:layout_marginHorizontal="32dp"-->
+<!--    android:layout_marginTop="8dp"-->
+<!--    android:textColor="?attr/colorSurfaceInverse"-->
+<!--    android:text="@string/google"-->
+<!--    app:icon="@drawable/google"-->
+<!--    app:iconGravity="textStart"-->
+<!--    app:iconSize="17dp"-->
+<!--    app:iconTint="@null"-->
+<!--    app:layout_constraintEnd_toEndOf="parent"-->
+<!--    app:layout_constraintStart_toStartOf="parent"-->
+<!--    app:layout_constraintTop_toBottomOf="@id/btn_register" />-->
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

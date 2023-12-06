@@ -7,7 +7,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.safeplayguardian.R
-import com.example.safeplayguardian.ViewModelVactory
+import com.example.safeplayguardian.ViewModelFactory
 import com.example.safeplayguardian.databinding.ActivityRecomendationBinding
 import com.example.safeplayguardian.remote.response.ListToyItem
 import com.example.safeplayguardian.ui.adapter.ToysAdapter
@@ -18,7 +18,7 @@ import retrofit2.HttpException
 class RecomendationActivity : AppCompatActivity() {
    private lateinit var binding: ActivityRecomendationBinding
    private val viewModel: RecomendationViewModel by viewModels {
-      ViewModelVactory.getInstance(this)
+      ViewModelFactory.getInstance(this)
    }
 
    override fun onCreate(savedInstanceState: Bundle?) {

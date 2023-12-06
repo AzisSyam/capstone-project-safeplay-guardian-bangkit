@@ -21,7 +21,7 @@
       app:menu="@menu/profile_menu"
       app:navigationIcon="@drawable/baseline_keyboard_backspace_24"
       app:title="@string/profile"
-      app:titleCentered="true" />
+      app:titleCentered="false" />
   </com.google.android.material.appbar.AppBarLayout>
 
   <ImageView

@@ -22,7 +22,7 @@
       android:layout_height="wrap_content"
       app:navigationIcon="@drawable/baseline_keyboard_backspace_24"
       app:title="@string/recomendation_heading"
-      app:titleCentered="true" />
+      app:titleCentered="false" />
   </com.google.android.material.appbar.AppBarLayout>
 
   <androidx.recyclerview.widget.RecyclerView
