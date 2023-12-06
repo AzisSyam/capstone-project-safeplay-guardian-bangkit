@@ -5,14 +5,14 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.safeplayguardian.data.pref.Repository
+import com.example.safeplayguardian.data.repository.ToyRepository
 import com.example.safeplayguardian.remote.response.ListToyItem
 import com.example.safeplayguardian.remote.response.ToysRecomendationResponse
 import com.google.gson.Gson
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
 
-class RecomendationViewModel(private val repository: Repository) : ViewModel() {
+class RecomendationViewModel(private val repository: ToyRepository) : ViewModel() {
    private val _toyItem = MutableLiveData<List<ListToyItem?>?>()
    val toyItem: LiveData<List<ListToyItem?>?> = _toyItem
 

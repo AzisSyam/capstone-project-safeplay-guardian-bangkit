@@ -3,22 +3,24 @@ package com.example.safeplayguardian.ui.main
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
+import com.example.safeplayguardian.ViewModelFactory
 import com.example.safeplayguardian.databinding.ActivityMainBinding
-import com.example.safeplayguardian.remote.response.UserResponse
 import com.example.safeplayguardian.ui.login.LoginActivity
 import com.example.safeplayguardian.ui.profile.ProfileActivity
 import com.example.safeplayguardian.ui.recomendation.RecomendationActivity
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
+import com.example.safeplayguardian.utils.FirebaseManager
 
 class MainActivity : AppCompatActivity() {
    private lateinit var binding: ActivityMainBinding
-   private lateinit var firebaseAuth: FirebaseAuth
    private lateinit var userPhotoUrl: String
+   private lateinit var userId: String
+
+   private val viewModel by viewModels<MainViewModel> {
+      ViewModelFactory.getInstance(this)
+   }
 
    override fun onCreate(savedInstanceState: Bundle?) {
       super.onCreate(savedInstanceState)
@@ -32,41 +34,42 @@ class MainActivity : AppCompatActivity() {
 
       binding.userPhoto.setOnClickListener {
          val intent = Intent(this, ProfileActivity::class.java)
+         intent.putExtra("userId", userId)
          startActivity(intent)
       }
 
-      firebaseAuth = Firebase.auth
-      val firebaseUser = firebaseAuth.currentUser
+//      firebaseAuth = Firebase.auth
+//      val firebaseUser = firebaseAuth.currentUser
 
-//      mengambil session
-      if (firebaseUser == null) {
-         // Not signed in, launch the Login activity
-         startActivity(Intent(this, LoginActivity::class.java))
-         finish()
-         return
-      }
+      viewModel.getSession().observe(this) { user ->
+         if (user.uid == "") {
+            startActivity(Intent(this, LoginActivity::class.java))
+            finish()
+         }
 
-//      mengambil data dari firebase dan update beberapa UI
-      val db = Firebase.firestore
-      val docRef = db.collection("users").document(firebaseUser.uid)
-      docRef.get()
-         .addOnSuccessListener { document ->
-            if (document.exists()) {
-               val user = document.toObject(UserResponse::class.java)
-               if (user != null) {
-                  userPhotoUrl = user.photoUrl.toString()
-               }
+         userId = user.uid
 
-//               mengatur foto profil pengguna menggunakan data dari firebase
-               Glide.with(binding.userPhoto).load(userPhotoUrl).circleCrop()
-                  .into(binding.userPhoto)
-            } else {
-               Log.d(TAG, "No such document")
+         FirebaseManager.getUserData(userId,
+            onSuccess = { user ->
+               userPhotoUrl = user.photoUrl.toString()
+               loadUserProfilePhoto(userPhotoUrl)
+            },
+            onFailure = { exception ->
+               Log.d(TAG, "Error fetching user data: ${exception.message}")
             }
-         }
-         .addOnFailureListener { exception ->
-            Log.d(TAG, "get failed with ", exception)
-         }
+         )
+      }
+   }
+
+   private fun loadUserProfilePhoto(userPhotoUrl: String) {
+      Glide.with(binding.userPhoto)
+         .load(userPhotoUrl)
+         .circleCrop()
+         .into(binding.userPhoto)
+   }
+
+   override fun onResume() {
+      super.onResume()
    }
 
    companion object {
