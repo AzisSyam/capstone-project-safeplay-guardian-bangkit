@@ -39,4 +39,6 @@
   <string name="register_message">*Data yang telah dimasukkan tidak dapat diubah</string>
   <string name="btn_logout">Tombol logout</string>
   <string name="toy_picture">Gambar mainan</string>
+  <string name="data_signup_confirm">Data yang dimasukkan sudah benar?</string>
+  <string name="logout_confirm">Apakah anda ingin keluar?</string>
 </resources>

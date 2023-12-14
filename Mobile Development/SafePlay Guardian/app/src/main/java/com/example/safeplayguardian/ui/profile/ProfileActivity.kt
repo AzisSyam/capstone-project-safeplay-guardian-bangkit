@@ -7,6 +7,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.bumptech.glide.Glide
+import com.example.safeplayguardian.R
 import com.example.safeplayguardian.ViewModelFactory
 import com.example.safeplayguardian.databinding.ActivityProfileBinding
 import com.example.safeplayguardian.ui.login.LoginActivity
@@ -48,10 +49,12 @@ class ProfileActivity : AppCompatActivity() {
 //      }
 
       binding.btnLogout.setOnClickListener {
-         viewModel.logout()
-         val intent = Intent(this, LoginActivity::class.java)
-         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-         startActivity(intent)
+         DialogHelper.showAlert(getString(R.string.logout_confirm), this){
+            viewModel.logout()
+            val intent = Intent(this, LoginActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+            startActivity(intent)
+         }
       }
 
       viewModel.isLoading.observe(this) { isLoading ->

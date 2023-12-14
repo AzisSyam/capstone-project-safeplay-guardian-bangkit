@@ -19,12 +19,11 @@ import com.example.safeplayguardian.R
 import com.example.safeplayguardian.ViewModelFactory
 import com.example.safeplayguardian.databinding.ActivitySignUpBinding
 import com.example.safeplayguardian.ui.login.LoginActivity
+import com.example.safeplayguardian.utils.DialogHelper
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class SignUpActivity : AppCompatActivity(), OnImageSelectedListener {
    private lateinit var binding: ActivitySignUpBinding
-
-   //   private lateinit var firebaseAuth: FirebaseAuth
    private var currentImageUri: Uri? = null
 
    private val viewModel by viewModels<SignUpViewModel> {
@@ -57,43 +56,33 @@ class SignUpActivity : AppCompatActivity(), OnImageSelectedListener {
             val email = binding.etEmail.text.toString().trim()
             val password = binding.etPassword.text.toString()
             if (name.isNotEmpty() && email.isNotEmpty() && password.isNotEmpty()) {
-               var imageUrl: String? = null
-               var photoName: String? = null
+               DialogHelper.showAlert(getString(R.string.data_signup_confirm), this) {
+                  var imageUrl: String? = null
 
-               viewModel.uploadImageToStorage(currentImageUri)
-               viewModel.photoName.observe(this) {
-                  photoName = it
-               }
-               viewModel.imageUrl.observe(this) {
-//                  imageUrl = it
-                  if (imageUrl != null) {
+                  viewModel.uploadImageToStorage(currentImageUri)
+                  viewModel.imageUrl.observe(this) {
+                     imageUrl = it
+                  }
+
+                  viewModel.photoName.observe(this) {
+//                  photoName = it
                      viewModel.performSignUp(
-                        imageUrl = imageUrl,
-                        photoName = photoName!!,
+                        imageUrl = imageUrl!!,
+                        photoName = it,
                         name = name,
                         password = password,
                         email = email
                      )
-                     viewModel.signUpResult.observe(this) { signUpResult ->
-                        if (signUpResult.success) {
-                           val intent = Intent(this, LoginActivity::class.java)
-                           startActivity(intent)
-                           finish()
-                        }
-                     }
                   }
 
-
+                  viewModel.signUpResult.observe(this) { signUpResult ->
+                     if (signUpResult.success) {
+                        val intent = Intent(this, LoginActivity::class.java)
+                        startActivity(intent)
+                        finish()
+                     }
+                  }
                }
-
-//               viewModel.performSignUp(
-//                  imageUrl = imageUrl!!,
-//                  photoName = photoName!!,
-//                  name = name,
-//                  password = password,
-//                  email = email
-//               )
-
 
             } else {
                Toast.makeText(this, getString(R.string.form_empty_message), Toast.LENGTH_SHORT)
@@ -102,6 +91,13 @@ class SignUpActivity : AppCompatActivity(), OnImageSelectedListener {
          } catch (e: Exception) {
             Log.d(TAG, "error: ${e.message}")
          }
+
+      }
+
+
+
+      viewModel.isLoading.observe(this) { isLoading ->
+         DialogHelper.showLoading(progressBar = binding.progressBar, isLoading = isLoading)
       }
    }
 
@@ -243,7 +239,7 @@ class SignUpActivity : AppCompatActivity(), OnImageSelectedListener {
          override fun afterTextChanged(s: Editable?) {
             val email = s.toString()
             if (!isEmailValid(email)) {
-               val message= "Format email tidak valid"
+               val message = "Format email tidak valid"
                binding.etEmail.setError(message, null)
             }
          }

@@ -127,7 +127,7 @@ class UserRepository(
       }
    }
 
-   suspend fun uploadImageToFirebaseStorage(currentImageUri: Uri): Pair<String, String> {
+   suspend fun uploadImageToFirebaseStorage(currentImageUri: Uri?): Pair<String, String> {
       return suspendCoroutine { continuation ->
          if (currentImageUri != null) {
             // Pengguna menyertakan file foto
@@ -166,17 +166,12 @@ class UserRepository(
                   imageRef.downloadUrl.addOnSuccessListener { imageUrl ->
                      val photoName = imageRef.name
                      continuation.resume(Pair(imageUrl.toString(), photoName))
-
 //                     onSuccess.invoke(imageUrl.toString(), photoName)
                   }
                }
                .addOnFailureListener { exception ->
                   // Gagal mengunggah gambar
-//               Toast.makeText(
-//                  this,
-//                  "Failed to upload image: ${exception.message}",
-//                  Toast.LENGTH_SHORT
-//               ).show()
+                  Log.d("upload gambar regis", "$exception")
                }
          }
 
