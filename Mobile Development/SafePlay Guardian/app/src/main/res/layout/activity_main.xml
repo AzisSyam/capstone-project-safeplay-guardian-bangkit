@@ -4,6 +4,7 @@
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
+  android:scrollbars="none"
   tools:context=".ui.main.MainActivity">
 
 
@@ -33,9 +34,10 @@
       android:layout_marginEnd="32dp"
       app:layout_constraintEnd_toEndOf="parent"
       android:src="@drawable/user"
+      android:transitionName="user_photo"
       app:layout_constraintTop_toTopOf="parent"
-      tools:srcCompat="@tools:sample/avatars" />
-
+      tools:srcCompat="@tools:sample/avatars"
+      android:contentDescription="@string/user_photo" />
 
     <TextView
       android:id="@+id/tv_hello"
@@ -44,12 +46,11 @@
       android:layout_marginStart="32dp"
       android:layout_marginTop="32dp"
       android:text="@string/home_hello"
-      android:textSize="36dp"
+      android:textSize="36sp"
       android:textStyle="bold"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@id/tv_title_app" />
-
 
     <Button
       android:id="@+id/btn_recomendation"
@@ -57,7 +58,7 @@
       android:layout_width="0dp"
       android:layout_height="wrap_content"
       android:layout_marginTop="16dp"
-      android:shadowColor="@color/black"
+      app:elevation="4dp"
       android:text="@string/recomendation"
       app:layout_constraintStart_toStartOf="@id/tv_hello"
       app:layout_constraintTop_toBottomOf="@id/tv_hello" />
@@ -70,6 +71,7 @@
       android:layout_marginHorizontal="32dp"
       android:layout_marginTop="16dp"
       android:padding="16dp"
+      app:cardElevation="4dp"
       app:layout_constraintStart_toStartOf="@id/btn_recomendation"
       app:layout_constraintTop_toBottomOf="@id/btn_recomendation">
 
@@ -156,6 +158,7 @@
       android:layout_marginBottom="16dp"
       android:padding="16dp"
       app:layout_constraintBottom_toBottomOf="parent"
+      app:cardElevation="4dp"
       app:layout_constraintEnd_toEndOf="@+id/cv_upload_image"
       app:layout_constraintStart_toStartOf="@id/cv_upload_image"
       app:layout_constraintTop_toBottomOf="@+id/cv_upload_image">

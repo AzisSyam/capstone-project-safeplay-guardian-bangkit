@@ -8,7 +8,6 @@ import com.google.firebase.ktx.Firebase
 class FirebaseManager {
    companion object {
       private const val TAG = "FirebaseManager"
-
       fun getUserData(userId: String, onSuccess: (UserResponse) -> Unit, onFailure: (Exception) -> Unit) {
          try {
             val db = Firebase.firestore
@@ -33,5 +32,6 @@ class FirebaseManager {
             Log.d(TAG, "Exception: ${e.message}")
          }
       }
+
    }
 }

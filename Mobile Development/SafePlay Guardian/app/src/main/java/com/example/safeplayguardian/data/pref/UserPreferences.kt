@@ -14,8 +14,8 @@ val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "se
 class UserPreferences private constructor(private val datastore: DataStore<Preferences>) {
    suspend fun saveSession(user: LoginResult) {
       datastore.edit { preferences ->
-         preferences[USER_ID] = user.uid
-         preferences[EMAIL_KEY] = user.email
+         preferences[USER_ID] = user.userId.toString()
+         preferences[EMAIL_KEY] = user.userEmail.toString()
       }
    }
 

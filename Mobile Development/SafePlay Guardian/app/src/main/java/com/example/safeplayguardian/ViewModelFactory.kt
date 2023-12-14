@@ -10,6 +10,7 @@ import com.example.safeplayguardian.ui.login.LoginViewModel
 import com.example.safeplayguardian.ui.main.MainViewModel
 import com.example.safeplayguardian.ui.profile.ProfileViewModel
 import com.example.safeplayguardian.ui.recomendation.RecomendationViewModel
+import com.example.safeplayguardian.ui.signup.SignUpViewModel
 
 class ViewModelFactory(private val toyRepository:  ToyRepository, private val userRepository: UserRepository) :
    ViewModelProvider.NewInstanceFactory() {
@@ -28,9 +29,9 @@ class ViewModelFactory(private val toyRepository:  ToyRepository, private val us
          modelClass.isAssignableFrom(ProfileViewModel::class.java) -> {
             ProfileViewModel(userRepository) as T
          }
-
-
-
+         modelClass.isAssignableFrom(SignUpViewModel::class.java) -> {
+            SignUpViewModel(userRepository) as T
+         }
          else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
       }
    }

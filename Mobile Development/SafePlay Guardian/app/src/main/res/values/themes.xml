@@ -15,7 +15,6 @@
     <item name="colorPrimary">@color/blue_primary</item>
     <item name="colorOnPrimary">@color/white</item>
     <item name="colorSecondary">@color/white</item>
-    <item name="colorOnSecondary">@color/black</item>
     <item name="colorSecondaryContainer">@color/secondary_container</item>
     <item name="colorAccent">@color/white</item>
     <item name="colorOnSurface">@color/white</item>
@@ -46,5 +45,15 @@
   <style name="ButtonStyleFilled" parent="Widget.Material3.Button.IconButton.Filled">
     <item name="android:paddingRight">16dp</item>
     <item name="android:paddingLeft">16dp</item>
+  </style>
+
+  <style name="Base.Theme.SafePlayGuardian.BackButtonColor" parent="Widget.Material3.Toolbar">
+    <item name="navigationIconTint">@color/black</item>
+  </style>
+
+<!--  edit text edit profile-->
+  <style name="ShapeAppearance.App.SmallComponent" parent="ShapeAppearance.Material3.SmallComponent">
+    <item name="cornerFamily">rounded</item>
+    <item name="cornerSize">16dp</item>
   </style>
 </resources>

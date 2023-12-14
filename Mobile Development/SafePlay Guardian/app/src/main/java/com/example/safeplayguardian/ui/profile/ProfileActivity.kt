@@ -5,13 +5,12 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import com.bumptech.glide.Glide
-import com.example.safeplayguardian.R
 import com.example.safeplayguardian.ViewModelFactory
 import com.example.safeplayguardian.databinding.ActivityProfileBinding
-import com.example.safeplayguardian.ui.editprofile.EditProfileActivity
 import com.example.safeplayguardian.ui.login.LoginActivity
-import com.example.safeplayguardian.utils.FirebaseManager
+import com.example.safeplayguardian.utils.DialogHelper
 
 class ProfileActivity : AppCompatActivity() {
    private lateinit var binding: ActivityProfileBinding
@@ -25,20 +24,41 @@ class ProfileActivity : AppCompatActivity() {
       binding = ActivityProfileBinding.inflate(layoutInflater)
       setContentView(binding.root)
 
+      val toolbar: Toolbar = binding.topAppBar
+      setSupportActionBar(toolbar)
+      supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
       val intent = intent
       val userId = intent.getStringExtra("userId")
-      if (userId != null) {
 
-         FirebaseManager.getUserData(userId,
-            onSuccess = { user ->
-               setData(user.photoUrl!!, user.name!!, user.email!!)
-            },
-            onFailure = { exception ->
-               Log.d(TAG, "Error fetching user data: ${exception.message}")
-            }
-         )
+      if (userId != null) {
+         viewModel.getUserData(userId)
+         viewModel.userData.observe(this) { user ->
+            setData(user.photoUrl!!, user.name!!, user.email!!)
+         }
       }
-      menuHandle()
+      viewModel.error.observe(this){errorMessage->
+         Log.d(TAG, "Error fetching user data: $errorMessage")
+      }
+
+//      binding.btnEditProfile.setOnClickListener {
+//         val intent = Intent(this@ProfileActivity, EditProfileActivity::class.java)
+//         intent.putExtra("userId", userId)
+//         startActivity(intent)
+//      }
+
+      binding.btnLogout.setOnClickListener {
+         viewModel.logout()
+         val intent = Intent(this, LoginActivity::class.java)
+         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+         startActivity(intent)
+      }
+
+      viewModel.isLoading.observe(this) { isLoading ->
+         DialogHelper.showLoading(progressBar = binding.progressBar, isLoading = isLoading)
+      }
+
+//      menuHandle()
    }
 
    private fun setData(userPhotoUrl: String, name: String, email: String) {
@@ -50,33 +70,12 @@ class ProfileActivity : AppCompatActivity() {
       }
    }
 
-   private fun menuHandle() {
-
-      binding.topAppBar.setNavigationOnClickListener {
-         onBackPressed()
-      }
-
-      binding.topAppBar.setOnMenuItemClickListener { menuItem ->
-         when (menuItem.itemId) {
-            R.id.edit_profil -> {
-               val intent = Intent(this@ProfileActivity, EditProfileActivity::class.java)
-               startActivity(intent)
-               true
-            }
-
-            R.id.logout -> {
-//               firebaseAuth.signOut()
-               viewModel.logout()
-               val intent = Intent(this, LoginActivity::class.java)
-               intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-               startActivity(intent)
-               true
-            }
-
-            else -> super.onOptionsItemSelected(menuItem)
-         }
-      }
-   }
+//   private fun menuHandle() {
+//
+////      binding.topAppBar.setNavigationOnClickListener {
+////         onBackPressed()
+////      }
+//   }
 
    companion object {
       const val TAG = "EditProfileActivity"

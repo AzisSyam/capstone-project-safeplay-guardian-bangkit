@@ -2,21 +2,19 @@ package com.example.safeplayguardian.ui.login
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.safeplayguardian.R
 import com.example.safeplayguardian.ViewModelFactory
-import com.example.safeplayguardian.data.pref.LoginResult
 import com.example.safeplayguardian.databinding.ActivityLoginBinding
 import com.example.safeplayguardian.ui.main.MainActivity
 import com.example.safeplayguardian.ui.signup.SignUpActivity
-import com.google.firebase.auth.FirebaseAuth
+import com.example.safeplayguardian.utils.DialogHelper
 
 class LoginActivity : AppCompatActivity() {
    private lateinit var binding: ActivityLoginBinding
-   private lateinit var firebaseAuth: FirebaseAuth
+//   private lateinit var firebaseAuth: FirebaseAuth
    private val viewModel by viewModels<LoginViewModel> {
       ViewModelFactory.getInstance(this)
    }
@@ -31,35 +29,58 @@ class LoginActivity : AppCompatActivity() {
          startActivity(intent)
       }
 
-      firebaseAuth = FirebaseAuth.getInstance()
+//      firebaseAuth = FirebaseAuth.getInstance()
 
       binding.btnLogin.setOnClickListener {
          val email = binding.etEmail.text.toString()
          val password = binding.etPassword.text.toString()
-
-
          if (email.isNotEmpty() && password.isNotEmpty()) {
-            firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener {
-               if (it.isSuccessful) {
-                  val firebaseUser = firebaseAuth.currentUser
-                  val uid = firebaseUser?.uid
-                  Log.d("uid", "$uid")
-
-                  if (uid != null) {
-                     viewModel.saveSession(LoginResult(uid, email))
-                  }
-
-                  val intent = Intent(this, MainActivity::class.java)
-                  startActivity(intent)
-                  finish()
-               } else {
-                  Toast.makeText(this, it.exception.toString(), Toast.LENGTH_SHORT).show()
-                  Log.d("Tombol login ditekan", "onCreate: ${it.exception}")
-               }
-            }
+            viewModel.signInWithEmailAndPassword(email, password)
          } else {
             Toast.makeText(this, getString(R.string.form_empty_message), Toast.LENGTH_SHORT).show()
          }
+
+//         val email = binding.etEmail.text.toString()
+//         val password = binding.etPassword.text.toString()
+//
+//
+//         if (email.isNotEmpty() && password.isNotEmpty()) {
+//            firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener {
+//               if (it.isSuccessful) {
+//                  val firebaseUser = firebaseAuth.currentUser
+//                  val uid = firebaseUser?.uid
+//                  Log.d("uid", "$uid")
+//
+//                  if (uid != null) {
+//                     viewModel.saveSession(LoginResult(uid, email))
+//                  }
+//
+//                  val intent = Intent(this, MainActivity::class.java)
+//                  startActivity(intent)
+//                  finish()
+//               } else {
+//                  Toast.makeText(this, it.exception.toString(), Toast.LENGTH_SHORT).show()
+//                  Log.d("Tombol login ditekan", "onCreate: ${it.exception}")
+//               }
+//            }
+//         } else {
+//            Toast.makeText(this, getString(R.string.form_empty_message), Toast.LENGTH_SHORT).show()
+//         }
+      }
+
+      viewModel.loginResult.observe(this) { loginResult ->
+         if (loginResult.success) {
+            viewModel.saveSession(loginResult)
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finish()
+         } else {
+            Toast.makeText(this, loginResult?.error, Toast.LENGTH_SHORT).show()
+         }
+      }
+
+      viewModel.isLoading.observe(this) { isLoading ->
+         DialogHelper.showLoading(progressBar = binding.progressBar, isLoading = isLoading)
       }
    }
 }

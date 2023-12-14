@@ -50,16 +50,16 @@ class RecomendationActivity : AppCompatActivity() {
          try {
             //      recyclerView
             viewModel.getRecomendation()
-            viewModel.isLoading.observe(this, {
+            viewModel.isLoading.observe(this) {
                showLoading(it)
-            })
-            viewModel.toyItem.observe(this@RecomendationActivity, { data ->
+            }
+            viewModel.toyItem.observe(this@RecomendationActivity) { data ->
                val adapter = ToysAdapter(data) { selectedToy ->
                   showDetailDialog(selectedToy)
                }
                adapter.submitList(data)
                binding.rvStories.adapter = adapter
-            })
+            }
             binding.tvToyNotFound.visibility = View.GONE
             binding.btnRetry.visibility = View.GONE
          } catch (e: HttpException) {
@@ -78,7 +78,7 @@ class RecomendationActivity : AppCompatActivity() {
    //   dialod fragment detail mainan
    private fun showDetailDialog(toy: ListToyItem) {
       val detailDialog = DetailToyFragment.newInstance(toy)
-      detailDialog.show(supportFragmentManager, "ToyDetailDialog")
+      detailDialog.show(supportFragmentManager, "rounded_dialog_fragment")
    }
 
    //   menampilkan progress bar
