@@ -29,7 +29,9 @@
       android:exported="false" />
     <activity
       android:name=".ui.profile.ProfileActivity"
-      android:exported="false" />
+      android:exported="false"
+      android:parentActivityName=".ui.main.MainActivity"
+      />
     <activity
       android:name=".ui.recomendation.RecomendationActivity"
       android:exported="true" />
@@ -38,7 +40,7 @@
       android:exported="false"
       android:theme="@style/Base.Theme.SafePlayGuardian.NoactionBar" />
     <activity
-      android:name=".ui.SplashScreenActivity"
+      android:name=".ui.splachscreen.SplashScreenActivity"
       android:exported="true"
       android:theme="@style/SplashscreenNavigationColor">
       <intent-filter>
@@ -54,7 +56,6 @@
     <meta-data
       android:name="preloaded_fonts"
       android:resource="@array/preloaded_fonts" />
-
 
     <!-- Trigger Google Play services to install the backported photo picker module. -->
     <!--suppress AndroidDomInspection -->

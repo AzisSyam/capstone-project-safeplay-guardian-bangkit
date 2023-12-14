@@ -13,20 +13,23 @@ import android.widget.Button
 import android.widget.Toast
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.safeplayguardian.R
+import com.example.safeplayguardian.ViewModelFactory
 import com.example.safeplayguardian.databinding.ActivitySignUpBinding
 import com.example.safeplayguardian.ui.login.LoginActivity
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
-import com.google.firebase.storage.FirebaseStorage
 
 class SignUpActivity : AppCompatActivity(), OnImageSelectedListener {
    private lateinit var binding: ActivitySignUpBinding
-   private lateinit var firebaseAuth: FirebaseAuth
+
+   //   private lateinit var firebaseAuth: FirebaseAuth
    private var currentImageUri: Uri? = null
+
+   private val viewModel by viewModels<SignUpViewModel> {
+      ViewModelFactory.getInstance(this)
+   }
 
    override fun onCreate(savedInstanceState: Bundle?) {
       super.onCreate(savedInstanceState)
@@ -49,116 +52,171 @@ class SignUpActivity : AppCompatActivity(), OnImageSelectedListener {
       }
 
       binding.btnRegister.setOnClickListener {
-         uploadImageToFirebaseStorage{imageUrl->
-            performSignup(imageUrl)
-         }
-      }
-   }
+         try {
+            val name = binding.etName.text.toString().trim()
+            val email = binding.etEmail.text.toString().trim()
+            val password = binding.etPassword.text.toString()
+            if (name.isNotEmpty() && email.isNotEmpty() && password.isNotEmpty()) {
+               var imageUrl: String? = null
+               var photoName: String? = null
 
-   private fun performSignup(imageUrl: String) {
-      try {
-         firebaseAuth = FirebaseAuth.getInstance()
-
-         val name = binding.etName.text.toString()
-         val email = binding.etEmail.text.toString()
-         val password = binding.etPassword.text.toString()
-
-         if (name.isNotEmpty() && email.isNotEmpty() && password.isNotEmpty()) {
-            val user = firebaseAuth.createUserWithEmailAndPassword(email, password)
-
-            user.addOnCompleteListener {
-               if (it.isSuccessful) {
-                  val firebaseUser = it.result?.user
-                  if (firebaseUser != null) {
-                     val db = Firebase.firestore
-                     val user = hashMapOf(
-                        "email" to email,
-                        "name" to name,
-                        "photoUrl" to imageUrl
+               viewModel.uploadImageToStorage(currentImageUri)
+               viewModel.photoName.observe(this) {
+                  photoName = it
+               }
+               viewModel.imageUrl.observe(this) {
+//                  imageUrl = it
+                  if (imageUrl != null) {
+                     viewModel.performSignUp(
+                        imageUrl = imageUrl,
+                        photoName = photoName!!,
+                        name = name,
+                        password = password,
+                        email = email
                      )
-
-                     db.collection("users").document(firebaseUser.uid)
-                        .set(user)
-                        .addOnSuccessListener {
-                           Log.d(
-                              TAG,
-                              "DocumentSnapshot successfully written!"
-                           )
+                     viewModel.signUpResult.observe(this) { signUpResult ->
+                        if (signUpResult.success) {
+                           val intent = Intent(this, LoginActivity::class.java)
+                           startActivity(intent)
+                           finish()
                         }
-                        .addOnFailureListener { e -> Log.w(TAG, "Error writing document", e) }
-
-                     val intent = Intent(this@SignUpActivity, LoginActivity::class.java)
-                     startActivity(intent)
-                  } else {
-                     Toast.makeText(this, "Firebase user is null", Toast.LENGTH_SHORT).show()
-                     Log.d(TAG, "Firebase user is null")
+                     }
                   }
 
-               } else {
-                  Toast.makeText(this, it.exception.toString(), Toast.LENGTH_SHORT).show()
-                  Log.d("Tombol regis ditekan", "onCreate: ${it.exception}")
 
                }
+
+//               viewModel.performSignUp(
+//                  imageUrl = imageUrl!!,
+//                  photoName = photoName!!,
+//                  name = name,
+//                  password = password,
+//                  email = email
+//               )
+
+
+            } else {
+               Toast.makeText(this, getString(R.string.form_empty_message), Toast.LENGTH_SHORT)
+                  .show()
             }
-         } else {
-            Toast.makeText(this, getString(R.string.form_empty_message), Toast.LENGTH_SHORT)
-               .show()
+         } catch (e: Exception) {
+            Log.d(TAG, "error: ${e.message}")
          }
-      } catch (e: Exception) {
-         Log.d("Tombol regis ditekan", "onCreate: ${e.message}")
       }
    }
 
-   private fun uploadImageToFirebaseStorage(onSuccess: (String) -> Unit) {
-      currentImageUri?.let { uri ->
-         val storageReference = FirebaseStorage.getInstance().reference
-         val imageRef = storageReference.child("profile_images/${System.currentTimeMillis()}.jpg")
-
-         imageRef.putFile(uri)
-            .addOnSuccessListener {
-               // Gambar berhasil diunggah, dapatkan URL gambar
-               imageRef.downloadUrl.addOnSuccessListener { imageUrl ->
-                  onSuccess.invoke(imageUrl.toString())
-               }
-            }
-            .addOnFailureListener { exception ->
-               // Gagal mengunggah gambar
-               Toast.makeText(this, "Failed to upload image: ${exception.message}", Toast.LENGTH_SHORT).show()
-            }
-      }
-
-//      val storage = Firebase.storage
-//      // Create a storage reference from our app
-//      val storageRef = storage.reference
+//   private fun performSignup(imageUrl: String, photoName: String) {
+//      try {
+//         firebaseAuth = FirebaseAuth.getInstance()
 //
-//// Create a reference to "mountains.jpg"
-//      val mountainsRef = storageRef.child("mountains.jpg")
+//         val name = binding.etName.text.toString()
+//         val email = binding.etEmail.text.toString()
+//         val password = binding.etPassword.text.toString()
 //
-//// Create a reference to 'images/mountains.jpg'
-//      val mountainImagesRef = storageRef.child("images/mountains.jpg")
+//         if (name.isNotEmpty() && email.isNotEmpty() && password.isNotEmpty()) {
+//            val user = firebaseAuth.createUserWithEmailAndPassword(email, password)
 //
-//// While the file names are the same, the references point to different files
-//      mountainsRef.name == mountainImagesRef.name // true
-//      mountainsRef.path == mountainImagesRef.path // false
+//            user.addOnCompleteListener {
+//               if (it.isSuccessful) {
+//                  val firebaseUser = it.result?.user
+//                  if (firebaseUser != null) {
+//                     val db = Firebase.firestore
+//                     val user = hashMapOf(
+//                        "email" to email,
+//                        "name" to name,
+//                        "photoUrl" to imageUrl,
+//                        "fotoName" to photoName
+//                     )
 //
-//      var file = Uri.fromFile(File("$currentImageUri"))
-//      val riversRef = storageRef.child("images/${file.lastPathSegment}")
-//      val uploadTask = riversRef.putFile(file)
+//                     db.collection("users").document(firebaseUser.uid)
+//                        .set(user)
+//                        .addOnSuccessListener {
+//                           Log.d(
+//                              TAG,
+//                              "DocumentSnapshot successfully written!"
+//                           )
+//                        }
+//                        .addOnFailureListener { e -> Log.w(TAG, "Error writing document", e) }
 //
-//// Register observers to listen for when the download is done or if it fails
-//      uploadTask.addOnFailureListener {
-//         // Handle unsuccessful uploads
-//         Log.d(TAG, "uploadImageToFirebaseStorage: Upload successfull")
-//      }.addOnSuccessListener { taskSnapshot ->
-//         // taskSnapshot.metadata contains file metadata such as size, content-type, etc.
-//         // ...
+//                     val intent = Intent(this@SignUpActivity, LoginActivity::class.java)
+//                     startActivity(intent)
+//                  } else {
+//                     Toast.makeText(this, "Firebase user is null", Toast.LENGTH_SHORT).show()
+//                     Log.d(TAG, "Firebase user is null")
+//                  }
+//
+//               } else {
+//                  Toast.makeText(this, it.exception.toString(), Toast.LENGTH_SHORT).show()
+//                  Log.d("Tombol regis ditekan", "onCreate: ${it.exception}")
+//
+//               }
+//            }
+//         } else {
+//            Toast.makeText(this, getString(R.string.form_empty_message), Toast.LENGTH_SHORT)
+//               .show()
+//         }
+//      } catch (e: Exception) {
+//         Log.d("Tombol regis ditekan", "onCreate: ${e.message}")
 //      }
-   }
+//   }
+//
+//   private fun uploadImageToFirebaseStorage(onSuccess: (String, String) -> Unit) {
+//      if (currentImageUri != null) {
+//         // Pengguna menyertakan file foto
+//         val storageReference = FirebaseStorage.getInstance().reference
+//         val imageRef = storageReference.child("profile_images/${System.currentTimeMillis()}.jpg")
+//
+//         imageRef.putFile(currentImageUri!!)
+//            .addOnSuccessListener {
+//               // Gambar berhasil diunggah, dapatkan URL gambar
+//               imageRef.downloadUrl.addOnSuccessListener { imageUrl ->
+//                  val photoName = imageRef.name
+//                  onSuccess.invoke(imageUrl.toString(), photoName)
+//               }
+//            }
+//            .addOnFailureListener { exception ->
+//               // Gagal mengunggah gambar
+//               Toast.makeText(
+//                  this,
+//                  "Gagal mengunggah gambar ${exception.message}",
+//                  Toast.LENGTH_SHORT
+//               ).show()
+//            }
+//      } else {
+//         // Pengguna tidak menyertakan file foto, gunakan gambar dari Drawable
+//         val storageReference = FirebaseStorage.getInstance().reference
+//         val drawable = ContextCompat.getDrawable(this, R.drawable.user)
+//         val bitmap = (drawable as BitmapDrawable).bitmap
+//
+//         val baos = ByteArrayOutputStream()
+//         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+//         val data = baos.toByteArray()
+//
+//         val imageRef = storageReference.child("profile_images/${System.currentTimeMillis()}.jpg")
+//
+//         imageRef.putBytes(data)
+//            .addOnSuccessListener {
+//               // Gambar dari Drawable berhasil diunggah, dapatkan URL gambar
+//               imageRef.downloadUrl.addOnSuccessListener { imageUrl ->
+//                  val photoName = imageRef.name
+//                  onSuccess.invoke(imageUrl.toString(), photoName)
+//               }
+//            }
+//            .addOnFailureListener { exception ->
+//               // Gagal mengunggah gambar
+//               Toast.makeText(
+//                  this,
+//                  "Failed to upload image: ${exception.message}",
+//                  Toast.LENGTH_SHORT
+//               ).show()
+//            }
+//      }
+//   }
 
    private fun showBottomSheet() {
       val modalBottomSheet = ModalBottomSheet()
       modalBottomSheet.setOnImageSelectedListener(this)
-      modalBottomSheet.show(supportFragmentManager, ModalBottomSheet.TAG)
+      modalBottomSheet.show(supportFragmentManager, TAG)
    }
 
    override fun onImageSelected(imageUri: Uri) {
@@ -185,7 +243,7 @@ class SignUpActivity : AppCompatActivity(), OnImageSelectedListener {
          override fun afterTextChanged(s: Editable?) {
             val email = s.toString()
             if (!isEmailValid(email)) {
-               val message: String = "Format email tidak valid"
+               val message= "Format email tidak valid"
                binding.etEmail.setError(message, null)
             }
          }
@@ -227,7 +285,7 @@ class SignUpActivity : AppCompatActivity(), OnImageSelectedListener {
          savedInstanceState: Bundle?
       ): View? {
          val rootView = inflater.inflate(R.layout.modal_bottom_sheet_content, container, false)
-         val btnCamera: Button = rootView.findViewById<Button>(R.id.btn_camera_bottom_sheet)
+         val btnCamera: Button = rootView.findViewById(R.id.btn_camera_bottom_sheet)
          val btnGallery: Button = rootView.findViewById(R.id.btn_galeri_bottom_sheet)
 
          signUpActivity = SignUpActivity()
@@ -241,7 +299,6 @@ class SignUpActivity : AppCompatActivity(), OnImageSelectedListener {
          btnGallery.setOnClickListener {
             // Tambahkan logika untuk aksi galeri
             startGallery()
-            Toast.makeText(requireContext(), "Galeri dipilih", Toast.LENGTH_SHORT).show()
          }
 
          return rootView
@@ -267,14 +324,10 @@ class SignUpActivity : AppCompatActivity(), OnImageSelectedListener {
       fun setOnImageSelectedListener(listener: OnImageSelectedListener) {
          onImageSelectedListener = listener
       }
-
-      companion object {
-         const val TAG = "ModalBottomSheet"
-      }
    }
 
    companion object {
-      private const val TAG = "SignUpActivity"
+      const val TAG = "SignUpActivity"
    }
 }
 

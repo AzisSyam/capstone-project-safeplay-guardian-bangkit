@@ -11,7 +11,6 @@ import com.example.safeplayguardian.databinding.ActivityMainBinding
 import com.example.safeplayguardian.ui.login.LoginActivity
 import com.example.safeplayguardian.ui.profile.ProfileActivity
 import com.example.safeplayguardian.ui.recomendation.RecomendationActivity
-import com.example.safeplayguardian.utils.FirebaseManager
 
 class MainActivity : AppCompatActivity() {
    private lateinit var binding: ActivityMainBinding
@@ -42,34 +41,43 @@ class MainActivity : AppCompatActivity() {
 //      val firebaseUser = firebaseAuth.currentUser
 
       viewModel.getSession().observe(this) { user ->
-         if (user.uid == "") {
+         if (user.userId == "") {
             startActivity(Intent(this, LoginActivity::class.java))
             finish()
          }
 
-         userId = user.uid
+         userId = user.userId!!
 
-         FirebaseManager.getUserData(userId,
-            onSuccess = { user ->
-               userPhotoUrl = user.photoUrl.toString()
-               loadUserProfilePhoto(userPhotoUrl)
-            },
-            onFailure = { exception ->
-               Log.d(TAG, "Error fetching user data: ${exception.message}")
-            }
-         )
+         viewModel.getUserData(userId = userId)
+
+         viewModel.userData.observe(this) { user ->
+            val userPhotoUrl = user.photoUrl
+            if (userPhotoUrl != null) loadUserProfilePhoto(userPhotoUrl)
+         }
+
+         viewModel.error.observe(this){errorMessage->
+            Log.d(TAG, "Error fetching user data: $errorMessage")
+         }
+
+//         FirebaseManager.getUserData(userId,
+//            onSuccess = { user ->
+//               userPhotoUrl = user.photoUrl.toString()
+//               loadUserProfilePhoto(userPhotoUrl)
+//            },
+//            onFailure = { exception ->
+//               Log.d(TAG, "Error fetching user data: ${exception.message}")
+//            }
+//         )
       }
    }
 
    private fun loadUserProfilePhoto(userPhotoUrl: String) {
-      Glide.with(binding.userPhoto)
-         .load(userPhotoUrl)
-         .circleCrop()
-         .into(binding.userPhoto)
-   }
-
-   override fun onResume() {
-      super.onResume()
+      if (userPhotoUrl != null) {
+         Glide.with(binding.userPhoto)
+            .load(userPhotoUrl)
+            .circleCrop()
+            .into(binding.userPhoto)
+      }
    }
 
    companion object {
