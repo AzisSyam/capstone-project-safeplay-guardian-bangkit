@@ -5,6 +5,8 @@
   android:id="@+id/recomendation_toys"
   android:layout_width="match_parent"
   android:layout_marginBottom="16dp"
+  android:layout_marginHorizontal="32dp"
+  app:cardElevation="4dp"
   style="@style/Widget.Material3.CardView.Elevated"
   android:layout_height="wrap_content">
 
@@ -20,7 +22,8 @@
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
       android:scaleType="centerCrop"
-      tools:srcCompat="@tools:sample/backgrounds/scenic" />
+      tools:srcCompat="@tools:sample/backgrounds/scenic"
+      android:contentDescription="@string/toy_picture" />
 
     <TextView
       android:id="@+id/tv_toys_name"

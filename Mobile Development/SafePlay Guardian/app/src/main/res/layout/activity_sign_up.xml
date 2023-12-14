@@ -6,10 +6,11 @@
   android:layout_height="match_parent"
   tools:context=".ui.signup.SignUpActivity">
 
-  <ImageView
+  <de.hdodenhof.circleimageview.CircleImageView
     android:id="@+id/profile_photo"
     android:layout_width="187dp"
     android:layout_height="187dp"
+    android:scaleType="centerCrop"
     android:src="@drawable/user"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
@@ -93,7 +94,7 @@
     tools:alpha="100">
 
     <com.google.android.material.textfield.TextInputEditText
-      android:id="@+id/ed_email"
+      android:id="@+id/et_email"
       style="@style/TextAppearance.AppCompat.TextField.TextColor"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
@@ -132,7 +133,7 @@
     tools:alpha="100">
 
     <com.google.android.material.textfield.TextInputEditText
-      android:id="@+id/ed_password"
+      android:id="@+id/et_password"
       style="@style/TextAppearance.AppCompat.TextField.TextColor"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
@@ -143,10 +144,9 @@
   </com.google.android.material.textfield.TextInputLayout>
 
   <Button
-    android:id="@+id/btn_login"
-    style="@style/ButtonStyleFilled"
+    android:id="@+id/btn_register"
     android:layout_width="0dp"
-    android:layout_height="48dp"
+    android:layout_height="56dp"
     android:layout_marginStart="32dp"
     android:layout_marginTop="16dp"
     android:layout_marginEnd="32dp"
@@ -156,5 +156,17 @@
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@id/passwordEditTextLayout" />
 
-
+  <TextView
+    android:id="@+id/register_note"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="32dp"
+    android:layout_marginTop="8dp"
+    android:text="@string/register_message"
+    android:textAlignment="center"
+    android:textColor="@color/gray"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/btn_register" />
+  
 </androidx.constraintlayout.widget.ConstraintLayout>

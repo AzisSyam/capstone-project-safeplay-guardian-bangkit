@@ -5,4 +5,5 @@
   <color name="blue_primary">#1AA7EC</color>
   <color name="secondary_container">#A1D6F1</color>
   <color name="gray">#4E4E4E</color>
+  <color name="transparent">#00FFFFFF</color>
 </resources>
