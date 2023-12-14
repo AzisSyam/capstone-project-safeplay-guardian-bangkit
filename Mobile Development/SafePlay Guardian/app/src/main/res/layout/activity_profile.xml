@@ -16,111 +16,112 @@
 
     <com.google.android.material.appbar.MaterialToolbar
       android:id="@+id/topAppBar"
+      style="@style/Base.Theme.SafePlayGuardian.BackButtonColor"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:background="?attr/colorPrimary"
-      app:menu="@menu/profile_menu"
       app:navigationIcon="@drawable/baseline_keyboard_backspace_24"
-      app:navigationIconTint="@color/white"
       app:title="@string/profile"
-      app:titleTextColor="@color/white" />
+      app:titleCentered="false" />
   </com.google.android.material.appbar.AppBarLayout>
 
-  <ImageView
-    android:id="@+id/profile_photo"
-    android:layout_width="187dp"
-    android:layout_height="187dp"
-    android:layout_marginTop="64dp"
-    android:scaleType="centerCrop"
-    android:visibility="gone"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@id/appBarLayout"
-    tools:srcCompat="@tools:sample/avatars" />
-
-  <TextView
-    android:id="@+id/tv_label_name"
+  <com.google.android.material.card.MaterialCardView
+    android:id="@+id/profile_card"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginStart="32dp"
-    android:layout_marginTop="32dp"
-    android:layout_marginEnd="32dp"
-    android:text="@string/name"
-    android:textSize="16sp"
-    android:textStyle="bold"
-    android:visibility="gone"
+    android:layout_marginHorizontal="32dp"
+    android:backgroundTint="@color/blue_primary"
+    android:elevation="8dp"
+    app:strokeWidth="0dp"
+    app:cardElevation="4dp"
+    app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@id/profile_photo" />
+    app:layout_constraintTop_toTopOf="parent">
 
-  <TextView
-    android:id="@+id/tv_name_profile"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginStart="32dp"
-    android:layout_marginTop="8dp"
-    android:layout_marginEnd="32dp"
-    android:textSize="16sp"
-    android:visibility="gone"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@id/tv_label_name"
-    tools:text="Arsan" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content">
 
-  <TextView
-    android:id="@+id/tv_label_email"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginStart="32dp"
-    android:layout_marginTop="16dp"
-    android:layout_marginEnd="32dp"
-    android:text="@string/email"
-    android:textSize="16sp"
-    android:textStyle="bold"
-    android:visibility="gone"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@id/tv_name_profile" />
+      <!--      <ImageView-->
+      <!--        android:id="@+id/btn_edit_profile"-->
+      <!--        android:layout_width="24dp"-->
+      <!--        android:layout_height="24dp"-->
+      <!--        android:layout_marginTop="16dp"-->
+      <!--        android:layout_marginEnd="16dp"-->
+      <!--        android:contentDescription="@string/edit_profile"-->
+      <!--        android:src="@drawable/baseline_edit_24"-->
+      <!--        app:layout_constraintEnd_toEndOf="parent"-->
+      <!--        app:layout_constraintTop_toTopOf="parent" />-->
 
-  <TextView
-    android:id="@+id/tv_email_profile"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginStart="32dp"
-    android:layout_marginTop="8dp"
-    android:layout_marginEnd="32dp"
-    android:textSize="16sp"
-    android:visibility="gone"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@id/tv_label_email"
-    tools:text="Arsan@gmail.com" />
+      <ImageView
+        android:id="@+id/profile_photo"
+        android:layout_width="165dp"
+        android:layout_height="165dp"
+        android:layout_marginTop="72dp"
+        android:contentDescription="@string/user_photo"
+        android:scaleType="centerCrop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@tools:sample/avatars" />
 
-  <TextView
-    android:id="@+id/tv_login_command"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginBottom="8dp"
-    android:text="@string/command_to_log_in_profile"
-    android:textAlignment="center"
-    android:textSize="16sp"
-    android:visibility="visible"
-    app:layout_constraintBottom_toTopOf="@+id/button"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintHorizontal_bias="0.0"
-    app:layout_constraintStart_toStartOf="parent" />
+      <TextView
+        android:id="@+id/tv_name_profile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/profile_photo"
+        tools:text="Arsan" />
 
-  <Button
-    android:id="@+id/button"
-    style="@style/ButtonStyleFilled"
-    android:layout_width="88dp"
-    android:layout_height="48dp"
-    android:layout_marginTop="8dp"
-    android:text="@string/login"
-    android:visibility="visible"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="@+id/guideline_vertical_center" />
+      <TextView
+        android:id="@+id/tv_email_profile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="32dp"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_name_profile"
+        tools:text="Arsan@gmail.com" />
+
+      <View
+        android:layout_width="514dp"
+        android:layout_height="514dp"
+        android:layout_marginTop="-124dp"
+        android:background="@drawable/circle_background"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="parent" />
+
+      <Button
+        android:id="@+id/btn_logout"
+        style="@style/Widget.Material3.Button.IconButton.Filled"
+        android:contentDescription="@string/btn_logout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="124dp"
+        android:layout_marginBottom="32dp"
+        app:icon="@drawable/baseline_logout_24"
+        app:iconSize="24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_email_profile" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+  </com.google.android.material.card.MaterialCardView>
 
   <androidx.constraintlayout.widget.Guideline
     android:id="@+id/guideline_vertical_center"
@@ -130,5 +131,18 @@
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintGuide_percent="0.5"
     app:layout_constraintStart_toStartOf="parent" />
+
+  <com.google.android.material.progressindicator.CircularProgressIndicator
+    android:id="@+id/progress_bar"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="64dp"
+    android:indeterminate="true"
+    android:visibility="gone"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/profile_card"
+    app:trackCornerRadius="50dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
