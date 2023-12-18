@@ -6,4 +6,5 @@
   <color name="secondary_container">#A1D6F1</color>
   <color name="gray">#4E4E4E</color>
   <color name="transparent">#00FFFFFF</color>
+  <color name="dark_grey">#121212</color>
 </resources>

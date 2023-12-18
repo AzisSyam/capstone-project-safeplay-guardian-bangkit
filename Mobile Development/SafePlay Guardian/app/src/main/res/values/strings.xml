@@ -7,7 +7,7 @@
   <string name="home_hello">Hello 👋</string>
   <string name="login">Masuk</string>
   <string name="recomendation">Rekomendasi</string>
-  <string name="upload_info"><![CDATA[* Untuk mendapatkan hasil yang lebih akurat silahkan upload gambar yang hanya berisi satu objek mainan]]></string>
+  <string name="upload_info">* Untuk mendapatkan hasil yang lebih akurat silahkan upload gambar yang hanya berisi satu objek mainan></string>
   <string name="galeri">Galeri</string>
   <string name="camera">Kamera</string>
   <string name="check">Cek</string>
@@ -32,11 +32,20 @@
   <string name="password_length_alert">Password tidak boleh kurang dari 8 karakter</string>
   <string name="form_empty_message">Form tidak boleh kosong</string>
   <string name="logout">Keluar</string>
-  <string name="upload_image_here">Upload gambar disini</string>
+  <string name="upload_image_here">Unggah gambar disini</string>
   <string name="toy_not_found">Tidak dapat menampilkan rekomendasi mainan</string>
   <string name="user_photo">Foto pengguna</string>
   <string name="new_name">Nama baru</string>
   <string name="register_message">*Data yang telah dimasukkan tidak dapat diubah</string>
   <string name="btn_logout">Tombol logout</string>
   <string name="toy_picture">Gambar mainan</string>
+  <string name="data_signup_confirm">Data yang dimasukkan sudah benar?</string>
+  <string name="logout_confirm">Apakah anda yakin ingin keluar?</string>
+  <string name="password_confirm">Konfirmasi password</string>
+  <string name="password_does_not_match">Kata sandi konfirmasi tidak cocok</string>
+  <string name="failed_to_load_data">Gagal memuat data</string>
+  <string name="yes">Ya</string>
+  <string name="no">Tidak</string>
+  <string name="ok">OK</string>
+  <string name="image_not_found">Gambar belum dipilih</string>
 </resources>

@@ -10,10 +10,13 @@
 
   <ImageView
     android:id="@+id/toy_image_detail"
-    android:layout_width="330dp"
+    android:layout_width="match_parent"
     android:layout_height="330dp"
     android:layout_gravity="center"
     android:scaleType="centerCrop"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
     app:srcCompat="@drawable/welcome_illustration"
     tools:srcCompat="@drawable/welcome_illustration" />
 
@@ -26,6 +29,8 @@
     android:text="@string/toys_name_example"
     android:textSize="16sp"
     android:textStyle="bold"
+    app:layout_constraintTop_toBottomOf="@id/toy_image_detail"
+    app:layout_constraintEnd_toStartOf="parent"
     tools:text="@string/toys_name_example" />
 
   <TextView

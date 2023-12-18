@@ -43,6 +43,7 @@ android {
    }
    buildFeatures {
       viewBinding = true
+      buildConfig = true
    }
 }
 
@@ -91,4 +92,6 @@ dependencies {
    implementation("com.google.firebase:firebase-storage")
 
    implementation ("de.hdodenhof:circleimageview:3.1.0")
+   implementation ("com.makeramen:roundedimageview:2.3.0")
+
 }

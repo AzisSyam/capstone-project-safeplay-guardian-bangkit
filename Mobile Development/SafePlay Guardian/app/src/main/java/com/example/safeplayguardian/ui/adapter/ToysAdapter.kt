@@ -41,7 +41,8 @@ class ToysAdapter(
       fun bind(data: ListToyItem) {
          binding.tvToysName.text = data.name
          binding.tvToyDesc.text = data.description
-         Glide.with(binding.toyImage).load(data.photoUrl).into(binding.toyImage)
+         Glide.with(binding.toyImage).load(data.photoUrl)
+            .into(binding.toyImage)
       }
    }
 

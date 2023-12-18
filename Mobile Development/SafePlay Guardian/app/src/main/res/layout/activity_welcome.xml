@@ -5,6 +5,7 @@
   android:layout_width="match_parent"
   android:layout_height="match_parent"
   android:gravity="center"
+  style="@style/ParentBackgroundColor"
   android:orientation="vertical"
   tools:context=".ui.main.MainActivity">
 
@@ -38,6 +39,7 @@
     style="@style/ButtonStyleFilled"
     android:layout_width="88dp"
     android:layout_height="wrap_content"
-    android:text="@string/start" />
+    android:text="@string/start"
+    android:textSize="16sp" />
 
 </LinearLayout>
