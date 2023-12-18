@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:gravity="center"
+  android:orientation="vertical"
+  tools:context=".ui.main.MainActivity">
+
+  <ImageView
+    android:layout_width="293dp"
+    android:layout_height="293dp"
+    android:layout_marginBottom="36dp"
+    android:contentDescription="@string/welcome_screen_illustrarion"
+    android:src="@drawable/welcome_illustration" />
+
+  <TextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="16dp"
+    android:text="@string/safeplay_guardian"
+    android:textAlignment="center"
+    android:textColor="@color/blue_primary"
+    android:textSize="32sp"
+    android:textStyle="bold" />
+
+  <TextView
+    android:layout_width="336dp"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="32dp"
+    android:text="@string/welcome_text"
+    android:textAlignment="center"
+    android:textSize="20sp" />
+
+  <Button
+    android:id="@+id/btn_start"
+    style="@style/ButtonStyleFilled"
+    android:layout_width="88dp"
+    android:layout_height="wrap_content"
+    android:text="@string/start" />
+
+</LinearLayout>

@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:scrollbars="none"
+  tools:context=".ui.main.MainActivity">
+
+
+  <androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center">
+
+    <TextView
+      android:id="@+id/tv_title_app"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="32dp"
+      android:text="@string/app_name"
+      android:textColor="@color/blue_primary"
+      android:textSize="28sp"
+      android:textStyle="bold"
+      app:layout_constraintBottom_toBottomOf="@+id/user_photo"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="@+id/user_photo" />
+
+    <ImageView
+      android:id="@+id/user_photo"
+      android:layout_width="38dp"
+      android:layout_height="38dp"
+      android:layout_marginTop="32dp"
+      android:layout_marginEnd="32dp"
+      app:layout_constraintEnd_toEndOf="parent"
+      android:src="@drawable/user"
+      android:transitionName="user_photo"
+      app:layout_constraintTop_toTopOf="parent"
+      tools:srcCompat="@tools:sample/avatars"
+      android:contentDescription="@string/user_photo" />
+
+    <TextView
+      android:id="@+id/tv_hello"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="32dp"
+      android:layout_marginTop="32dp"
+      android:text="@string/home_hello"
+      android:textSize="36sp"
+      android:textStyle="bold"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/tv_title_app" />
+
+    <Button
+      android:id="@+id/btn_recomendation"
+      style="@style/Widget.Material3.Button.ElevatedButton"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="16dp"
+      app:elevation="4dp"
+      android:text="@string/recomendation"
+      app:layout_constraintStart_toStartOf="@id/tv_hello"
+      app:layout_constraintTop_toBottomOf="@id/tv_hello" />
+
+    <com.google.android.material.card.MaterialCardView
+      android:id="@+id/cv_upload_image"
+      style="@style/Widget.Material3.CardView.Elevated"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginHorizontal="32dp"
+      android:layout_marginTop="16dp"
+      android:padding="16dp"
+      app:cardElevation="4dp"
+      app:layout_constraintStart_toStartOf="@id/btn_recomendation"
+      app:layout_constraintTop_toBottomOf="@id/btn_recomendation">
+
+      <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <TextView
+          android:id="@+id/tv_upload_here"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:text="@string/upload_image_here"
+          android:textAlignment="center"
+          android:textSize="16sp"
+          app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+          android:id="@+id/toys_image"
+          android:layout_width="match_parent"
+          android:layout_height="318dp"
+          android:layout_marginTop="16dp"
+          android:src="@drawable/gallery_2"
+          app:layout_constraintEnd_toEndOf="@id/tv_upload_here"
+          app:layout_constraintHorizontal_bias="1.0"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@id/tv_upload_here" />
+
+        <TextView
+          android:id="@+id/tv_upload_info"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="8dp"
+          android:alpha="0.8"
+          android:text="@string/upload_info"
+          android:textSize="14sp"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@id/toys_image" />
+
+        <Button
+          android:id="@+id/btn_galeri"
+          style="@style/Widget.Material3.Button.TonalButton"
+          android:layout_width="140dp"
+          android:layout_height="48dp"
+          android:layout_marginTop="16dp"
+          android:backgroundTint="?attr/colorSecondaryContainer"
+          android:text="@string/galeri"
+          android:textColor="@color/white"
+          app:layout_constraintEnd_toEndOf="@+id/tv_upload_info"
+          app:layout_constraintTop_toBottomOf="@+id/tv_upload_info" />
+
+        <Button
+          android:id="@+id/btn_kamera"
+          style="@style/Widget.Material3.Button.TonalButton.Icon"
+          android:layout_width="140dp"
+          android:layout_height="48dp"
+          android:layout_marginTop="16dp"
+          android:text="@string/camera"
+          android:textColor="@color/white"
+          app:layout_constraintStart_toStartOf="@+id/tv_upload_info"
+          app:layout_constraintTop_toBottomOf="@+id/tv_upload_info" />
+
+        <Button
+          android:id="@+id/btn_check"
+          style="@style/ButtonStyleFilled"
+          android:layout_width="match_parent"
+          android:layout_height="48dp"
+          android:layout_marginTop="16dp"
+          android:text="@string/check"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@id/btn_galeri" />
+
+      </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+      style="@style/Widget.Material3.CardView.Elevated"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginHorizontal="32dp"
+      android:layout_marginTop="16dp"
+      android:layout_marginBottom="16dp"
+      android:padding="16dp"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:cardElevation="4dp"
+      app:layout_constraintEnd_toEndOf="@+id/cv_upload_image"
+      app:layout_constraintStart_toStartOf="@id/cv_upload_image"
+      app:layout_constraintTop_toBottomOf="@+id/cv_upload_image">
+
+      <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <TextView
+          android:id="@+id/tv_result_heading"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:text="@string/result"
+          android:textAlignment="center"
+          android:textSize="16sp"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+          android:id="@+id/tv_toys_name"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="8dp"
+          android:textSize="16sp"
+          android:textStyle="bold"
+          app:layout_constraintEnd_toEndOf="@id/tv_result_heading"
+          app:layout_constraintEnd_toStartOf="@id/tv_result_heading"
+          app:layout_constraintTop_toBottomOf="@id/tv_result_heading"
+          tools:text="@string/toys_name_example" />
+
+        <TextView
+          android:id="@+id/tv_toys_desc"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="8dp"
+          android:textSize="16sp"
+          app:layout_constraintEnd_toEndOf="@id/tv_result_heading"
+          app:layout_constraintEnd_toStartOf="@id/tv_result_heading"
+          app:layout_constraintStart_toStartOf="@+id/tv_toys_name"
+          app:layout_constraintTop_toBottomOf="@id/tv_toys_name"
+          tools:text="@string/toys_desc_example" />
+      </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+  </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

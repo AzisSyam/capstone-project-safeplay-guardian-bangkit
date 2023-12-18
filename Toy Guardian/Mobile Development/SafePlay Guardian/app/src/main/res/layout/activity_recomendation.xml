@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:id="@+id/recomendation_activity"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:layout_gravity="center_vertical"
+  tools:context=".ui.recomendation.RecomendationActivity">
+
+  <com.google.android.material.appbar.AppBarLayout
+    android:id="@+id/appBarLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent">
+
+    <com.google.android.material.appbar.MaterialToolbar
+      android:id="@+id/topAppBar"
+      style="@style/Base.Theme.SafePlayGuardian.BackButtonColor"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      app:navigationIcon="@drawable/baseline_keyboard_backspace_24"
+      app:title="@string/recomendation_heading"
+      app:titleCentered="false" />
+  </com.google.android.material.appbar.AppBarLayout>
+
+  <androidx.recyclerview.widget.RecyclerView
+    android:id="@+id/rv_stories"
+    android:layout_width="0dp"
+    android:layout_height="0dp"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHorizontal_bias="1.0"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/appBarLayout"
+    app:layout_constraintVertical_bias="0.0"
+    tools:listitem="@layout/recomendation_item" />
+
+  <TextView
+    android:id="@+id/tv_toy_not_found"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="8dp"
+    android:text="@string/toy_not_found"
+    android:textAlignment="center"
+    android:textSize="16sp"
+    android:visibility="gone"
+    app:layout_constraintBottom_toTopOf="@+id/guideline_vertical_center"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHorizontal_bias="0.0"
+    app:layout_constraintStart_toStartOf="parent" />
+
+  <Button
+    android:id="@+id/btn_retry"
+    style="@style/ButtonStyleFilled"
+    android:layout_width="wrap_content"
+    android:layout_height="48dp"
+    android:layout_marginHorizontal="16dp"
+    android:layout_marginTop="8dp"
+    android:text="@string/retry"
+    android:visibility="gone"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="@+id/guideline_vertical_center" />
+
+  <androidx.constraintlayout.widget.Guideline
+    android:id="@+id/guideline_vertical_center"
+    android:layout_width="wrap_content"
+    android:layout_height="64dp"
+    android:orientation="horizontal"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintGuide_percent="0.5"
+    app:layout_constraintStart_toStartOf="parent" />
+
+  <com.google.android.material.progressindicator.CircularProgressIndicator
+    android:id="@+id/progress_horizontal"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="64dp"
+    android:indeterminate="true"
+    app:layout_constraintVertical_bias="0.55"
+    android:visibility="visible"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:trackCornerRadius="50dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>
