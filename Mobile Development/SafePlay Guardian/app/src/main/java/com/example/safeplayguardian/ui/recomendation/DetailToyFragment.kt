@@ -8,8 +8,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.DialogFragment
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners
-import com.bumptech.glide.request.RequestOptions
 import com.example.safeplayguardian.R
 import com.example.safeplayguardian.remote.response.ListToyItem
 
@@ -26,14 +24,11 @@ class DetailToyFragment : DialogFragment() {
       inflater: LayoutInflater, container: ViewGroup?,
       savedInstanceState: Bundle?
    ): View? {
-      // Inflate the layout for this fragment
-      val view = inflater.inflate(R.layout.fragment_detail_toy, container, true)
+      val view = inflater.inflate(R.layout.fragment_detail_toy, container, false)
 
       val toyName = arguments?.getString("toyName")
       val toyDesc = arguments?.getString("toyDesc")
       val toyImage = arguments?.getString("toyImage")
-
-      val requestOptions = RequestOptions().transform(RoundedCorners(16))
 
       view.findViewById<TextView>(R.id.tv_toy_name_detail).text = toyName
       view.findViewById<TextView>(R.id.tv_toy_desc_detail).text = toyDesc
@@ -41,6 +36,14 @@ class DetailToyFragment : DialogFragment() {
          .into(view.findViewById<ImageView>(R.id.toy_image_detail))
 
       return view
+   }
+
+   override fun onStart() {
+      super.onStart()
+      dialog?.window?.setLayout(
+         ViewGroup.LayoutParams.MATCH_PARENT,
+         ViewGroup.LayoutParams.WRAP_CONTENT
+      )
    }
 
    companion object {

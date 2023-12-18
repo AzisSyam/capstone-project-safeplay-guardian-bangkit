@@ -48,7 +48,6 @@ class RecomendationActivity : AppCompatActivity() {
    private fun getData() {
       if (isNetworkAvailable(this)) {
          try {
-            //      recyclerView
             viewModel.getRecomendation()
             viewModel.isLoading.observe(this) {
                showLoading(it)
@@ -60,8 +59,13 @@ class RecomendationActivity : AppCompatActivity() {
                adapter.submitList(data)
                binding.rvStories.adapter = adapter
             }
-            binding.tvToyNotFound.visibility = View.GONE
-            binding.btnRetry.visibility = View.GONE
+
+            viewModel.errorResponse.observe(this){
+               if (it.isNotEmpty()){
+                  binding.tvToyNotFound.visibility = View.GONE
+                  binding.btnRetry.visibility = View.GONE
+               }
+            }
          } catch (e: HttpException) {
             Toast.makeText(this, e.message(), Toast.LENGTH_LONG).show()
          }
@@ -85,5 +89,4 @@ class RecomendationActivity : AppCompatActivity() {
    private fun showLoading(isLoading: Boolean?) {
       binding.progressHorizontal.visibility = if (isLoading!!) View.VISIBLE else View.GONE
    }
-
 }

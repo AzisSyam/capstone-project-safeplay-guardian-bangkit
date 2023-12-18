@@ -19,6 +19,7 @@ import com.bumptech.glide.Glide
 import com.example.safeplayguardian.R
 import com.example.safeplayguardian.databinding.ActivityEditProfileBinding
 import com.example.safeplayguardian.ui.profile.ProfileActivity
+import com.example.safeplayguardian.ui.signup.OnImageSelectedListener
 import com.example.safeplayguardian.ui.signup.SignUpActivity
 import com.example.safeplayguardian.utils.FirebaseManager
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -41,7 +42,6 @@ class EditProfileActivity : AppCompatActivity(), OnImageSelectedListener {
       setContentView(binding.root)
 
       val intent = intent
-//      val user = intent.getStringExtra("userId")
       userId = intent.getStringExtra("userId")!!
 
       if (userId != null) {
@@ -85,7 +85,7 @@ class EditProfileActivity : AppCompatActivity(), OnImageSelectedListener {
       }
    }
 
-   private fun performUpdateProfile(imageUrl: String, firebaseUser: String, photoName: String) {
+   private fun performUpdateProfile(imageUrl: String , firebaseUser: String, photoName: String) {
       try {
          firebaseAuth = FirebaseAuth.getInstance()
 
@@ -268,7 +268,5 @@ class EditProfileActivity : AppCompatActivity(), OnImageSelectedListener {
    }
 }
 
-interface OnImageSelectedListener {
-   fun onImageSelected(imageUri: Uri)
-}
+
 

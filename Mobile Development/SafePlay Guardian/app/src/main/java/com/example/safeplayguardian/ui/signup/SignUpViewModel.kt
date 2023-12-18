@@ -77,10 +77,8 @@ class SignUpViewModel(private val repository: UserRepository) : ViewModel() {
          _isLoading.value = true
          try {
             val (imageUrl, photoName) = repository.uploadImageToFirebaseStorage(currentImageUri)
-
             _imageUrl.value = imageUrl
             _photoName.value = photoName
-
          } catch (e: Exception) {
             Log.e("Create account", "uploadImageToStorage error", e)
          } finally {

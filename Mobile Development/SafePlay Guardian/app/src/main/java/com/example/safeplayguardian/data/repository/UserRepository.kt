@@ -73,7 +73,7 @@ class UserRepository(
       return resultLiveData
    }
 
-   suspend fun performSignup(
+   fun performSignup(
       imageUrl: String,
       photoName: String,
       name: String,
@@ -104,7 +104,7 @@ class UserRepository(
                         )
                      }
                      .addOnFailureListener { e ->
-                        Log.w(
+                        Log.d(
                            SignUpActivity.TAG,
                            "Error writing document",
                            e
@@ -117,7 +117,6 @@ class UserRepository(
                }
 
             } else {
-//               Toast.makeText(this, it.exception.toString(), Toast.LENGTH_SHORT).show()
                Log.d("Tombol regis ditekan", "onCreate: ${it.exception}")
 
             }
@@ -166,7 +165,6 @@ class UserRepository(
                   imageRef.downloadUrl.addOnSuccessListener { imageUrl ->
                      val photoName = imageRef.name
                      continuation.resume(Pair(imageUrl.toString(), photoName))
-//                     onSuccess.invoke(imageUrl.toString(), photoName)
                   }
                }
                .addOnFailureListener { exception ->

@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.os.Handler
 import androidx.appcompat.app.AppCompatActivity
 import com.example.safeplayguardian.R
-import com.example.safeplayguardian.ui.WelcomeActivity
+import com.example.safeplayguardian.ui.main.MainActivity
 
 class SplashScreenActivity : AppCompatActivity() {
    // Waktu penundaan (dalam milidetik) sebelum beralih ke layar utama
@@ -17,9 +17,9 @@ class SplashScreenActivity : AppCompatActivity() {
 
       Handler().postDelayed({
          // Membuat Intent untuk pindah ke layar utama
-         val intent = Intent(this@SplashScreenActivity, WelcomeActivity::class.java)
+         val intent = Intent(this@SplashScreenActivity, MainActivity::class.java)
          startActivity(intent)
-         finish() // Menutup SplashScreenActivity agar tidak dapat kembali ke halaman ini
+         finish()
       }, SPLASH_DELAY)
    }
 }
