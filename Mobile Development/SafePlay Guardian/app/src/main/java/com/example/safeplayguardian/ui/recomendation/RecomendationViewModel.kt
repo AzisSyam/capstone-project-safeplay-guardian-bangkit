@@ -11,7 +11,10 @@ import com.example.safeplayguardian.remote.response.ToysRecomendationResponse
 import com.google.gson.Gson
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
+<<<<<<< HEAD
 import java.io.IOException
+=======
+>>>>>>> cc
 
 class RecomendationViewModel(private val repository: ToyRepository) : ViewModel() {
    private val _toyItem = MutableLiveData<List<ListToyItem?>?>()
@@ -30,18 +33,25 @@ class RecomendationViewModel(private val repository: ToyRepository) : ViewModel(
             val response = repository.getRecomendation()
             _isLoading.value = false
             _toyItem.value = response.listToy
+<<<<<<< HEAD
          } catch (e: IOException) {
             _errorResponse.value = e.message!!
             _isLoading.value = false
+=======
+            Log.d("story detail", response.listToy.toString())
+>>>>>>> cc
          } catch (e: HttpException) {
             _isLoading.value = false
             val errorBody = e.response()?.errorBody()?.string()
             val errorResponse = Gson().fromJson(errorBody, ToysRecomendationResponse::class.java)
             _errorResponse.value = errorResponse.message!!
             Log.d("story List", e.message.toString())
+<<<<<<< HEAD
          } catch (e: Exception) {
             Log.d("RecomendationActivity","getRecomendation: ${e.message}")
             _isLoading.value = false
+=======
+>>>>>>> cc
          }
       }
    }

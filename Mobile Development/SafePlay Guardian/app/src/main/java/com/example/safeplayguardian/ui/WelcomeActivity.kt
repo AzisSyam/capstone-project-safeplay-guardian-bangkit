@@ -9,7 +9,11 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.safeplayguardian.databinding.ActivityWelcomeBinding
+<<<<<<< HEAD
 import com.example.safeplayguardian.ui.login.LoginActivity
+=======
+import com.example.safeplayguardian.ui.main.MainActivity
+>>>>>>> cc
 
 class WelcomeActivity : AppCompatActivity() {
 
@@ -22,7 +26,11 @@ class WelcomeActivity : AppCompatActivity() {
 
       binding.btnStart.setOnClickListener {
          if (isInternetAvailable()) {
+<<<<<<< HEAD
             val intent = Intent(this@WelcomeActivity, LoginActivity::class.java)
+=======
+            val intent = Intent(this@WelcomeActivity, MainActivity::class.java)
+>>>>>>> cc
             startActivity(intent)
             finish()
          } else {

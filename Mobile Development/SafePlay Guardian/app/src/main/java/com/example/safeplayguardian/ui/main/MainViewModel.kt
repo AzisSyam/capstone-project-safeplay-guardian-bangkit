@@ -1,10 +1,14 @@
 package com.example.safeplayguardian.ui.main
 
+<<<<<<< HEAD
 import android.util.Log
+=======
+>>>>>>> cc
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
+<<<<<<< HEAD
 import androidx.lifecycle.viewModelScope
 import com.example.safeplayguardian.data.pref.LoginResult
 import com.example.safeplayguardian.data.repository.ClassificationRepository
@@ -28,15 +32,25 @@ class MainViewModel(
    private val _errorResponse = MutableLiveData<String>()
    val errorResponse: LiveData<String> get() = _errorResponse
 
+=======
+import com.example.safeplayguardian.data.pref.LoginResult
+import com.example.safeplayguardian.data.repository.UserRepository
+import com.example.safeplayguardian.remote.response.UserResponse
+
+class MainViewModel(private val userRepository: UserRepository) : ViewModel() {
+>>>>>>> cc
    private val _userData = MutableLiveData<UserResponse>()
    val userData: LiveData<UserResponse> get() = _userData
 
    private val _error = MutableLiveData<String>()
    val error: LiveData<String> get() = _error
 
+<<<<<<< HEAD
    private val _classificationResponse = MutableLiveData<Result?>()
    val classificationData: LiveData<Result?> get() = _classificationResponse
 
+=======
+>>>>>>> cc
    fun getUserData(userId: String) {
       userRepository.getUserData(userId)
          .observeForever { user ->
@@ -51,6 +65,7 @@ class MainViewModel(
    fun getSession(): LiveData<LoginResult> {
       return userRepository.getSession().asLiveData()
    }
+<<<<<<< HEAD
 
    fun startClassification(file: MultipartBody.Part) {
       _isLoading.value = true
@@ -72,4 +87,6 @@ class MainViewModel(
          }
       }
    }
+=======
+>>>>>>> cc
 }

@@ -3,10 +3,14 @@
   xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
+<<<<<<< HEAD
   android:id="@+id/signup_layout"
   android:layout_height="match_parent"
   style="@style/ParentBackgroundColor"
   android:layout_gravity="center"
+=======
+  android:layout_height="match_parent"
+>>>>>>> cc
   tools:context=".ui.signup.SignUpActivity">
 
   <de.hdodenhof.circleimageview.CircleImageView
@@ -19,7 +23,11 @@
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent"
+<<<<<<< HEAD
     app:layout_constraintVertical_bias="0.07" />
+=======
+    app:layout_constraintVertical_bias="0.15" />
+>>>>>>> cc
 
   <Button
     android:id="@+id/btn_camera"
@@ -146,6 +154,7 @@
       tools:text="@string/email" />
   </com.google.android.material.textfield.TextInputLayout>
 
+<<<<<<< HEAD
   <TextView
     android:id="@+id/tv_label_password_confirm"
     android:layout_width="match_parent"
@@ -185,6 +194,8 @@
       tools:text="@string/email" />
   </com.google.android.material.textfield.TextInputLayout>
 
+=======
+>>>>>>> cc
   <Button
     android:id="@+id/btn_register"
     android:layout_width="0dp"
@@ -192,12 +203,19 @@
     android:layout_marginStart="32dp"
     android:layout_marginTop="16dp"
     android:layout_marginEnd="32dp"
+<<<<<<< HEAD
     android:textSize="16sp"
+=======
+>>>>>>> cc
     android:text="@string/signup"
     android:visibility="visible"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
+<<<<<<< HEAD
     app:layout_constraintTop_toBottomOf="@id/passwordConfirmEditTextLayout" />
+=======
+    app:layout_constraintTop_toBottomOf="@id/passwordEditTextLayout" />
+>>>>>>> cc
 
   <TextView
     android:id="@+id/register_note"
@@ -211,6 +229,7 @@
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@id/btn_register" />
+<<<<<<< HEAD
 
   <com.google.android.material.progressindicator.LinearProgressIndicator
     android:id="@+id/progress_bar"
@@ -223,5 +242,7 @@
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent"
     />
+=======
+>>>>>>> cc
   
 </androidx.constraintlayout.widget.ConstraintLayout>

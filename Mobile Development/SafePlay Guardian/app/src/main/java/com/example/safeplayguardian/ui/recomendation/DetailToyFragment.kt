@@ -8,6 +8,11 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.DialogFragment
 import com.bumptech.glide.Glide
+<<<<<<< HEAD
+=======
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.bumptech.glide.request.RequestOptions
+>>>>>>> cc
 import com.example.safeplayguardian.R
 import com.example.safeplayguardian.remote.response.ListToyItem
 
@@ -24,12 +29,22 @@ class DetailToyFragment : DialogFragment() {
       inflater: LayoutInflater, container: ViewGroup?,
       savedInstanceState: Bundle?
    ): View? {
+<<<<<<< HEAD
       val view = inflater.inflate(R.layout.fragment_detail_toy, container, false)
+=======
+      // Inflate the layout for this fragment
+      val view = inflater.inflate(R.layout.fragment_detail_toy, container, true)
+>>>>>>> cc
 
       val toyName = arguments?.getString("toyName")
       val toyDesc = arguments?.getString("toyDesc")
       val toyImage = arguments?.getString("toyImage")
 
+<<<<<<< HEAD
+=======
+      val requestOptions = RequestOptions().transform(RoundedCorners(16))
+
+>>>>>>> cc
       view.findViewById<TextView>(R.id.tv_toy_name_detail).text = toyName
       view.findViewById<TextView>(R.id.tv_toy_desc_detail).text = toyDesc
       Glide.with(requireContext()).load(toyImage)
@@ -38,6 +53,7 @@ class DetailToyFragment : DialogFragment() {
       return view
    }
 
+<<<<<<< HEAD
    override fun onStart() {
       super.onStart()
       dialog?.window?.setLayout(
@@ -46,6 +62,8 @@ class DetailToyFragment : DialogFragment() {
       )
    }
 
+=======
+>>>>>>> cc
    companion object {
       @JvmStatic
       fun newInstance(listToy: ListToyItem): DetailToyFragment {

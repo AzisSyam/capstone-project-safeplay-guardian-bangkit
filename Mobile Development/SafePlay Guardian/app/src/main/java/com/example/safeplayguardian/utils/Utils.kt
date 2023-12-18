@@ -1,6 +1,7 @@
 package com.example.safeplayguardian.utils
 
 import android.content.Context
+<<<<<<< HEAD
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.ConnectivityManager
@@ -70,6 +71,11 @@ fun Bitmap.getRotatedBitmap(file: File): Bitmap? {
    }
 }
 
+=======
+import android.net.ConnectivityManager
+import android.view.View
+import android.widget.ProgressBar
+>>>>>>> cc
 
 fun isNetworkAvailable(context: Context): Boolean {
    val connectivityManager =
@@ -78,6 +84,7 @@ fun isNetworkAvailable(context: Context): Boolean {
    return networkInfo != null && networkInfo.isConnected
 }
 
+<<<<<<< HEAD
 object DialogHelper {
    fun showLoading(isLoading: Boolean, progressBar: ProgressBar) {
       progressBar.visibility = if (isLoading == true) View.VISIBLE else View.GONE
@@ -121,3 +128,15 @@ object DialogHelper {
 
 
 
+=======
+fun showLoading(isLoading: Boolean){
+
+}
+
+object DialogHelper{
+   fun showLoading(isLoading: Boolean, progressBar: ProgressBar){
+      progressBar.visibility = if (isLoading == true) View.VISIBLE else View.GONE
+   }
+}
+
+>>>>>>> cc

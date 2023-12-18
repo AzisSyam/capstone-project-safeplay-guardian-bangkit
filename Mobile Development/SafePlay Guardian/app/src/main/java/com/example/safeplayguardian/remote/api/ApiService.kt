@@ -1,5 +1,6 @@
 package com.example.safeplayguardian.remote.api
 
+<<<<<<< HEAD
 import com.example.safeplayguardian.remote.response.ClassificationResponse
 import com.example.safeplayguardian.remote.response.ToysRecomendationResponse
 import okhttp3.MultipartBody
@@ -18,4 +19,14 @@ interface ApiService {
    suspend fun startClassification(
       @Part file: MultipartBody.Part
    ): ClassificationResponse
+=======
+import com.example.safeplayguardian.remote.response.ToysRecomendationResponse
+import retrofit2.http.GET
+
+interface ApiService {
+
+   //   recyclerview
+   @GET("recomendation")
+   suspend fun getRecomendation(): ToysRecomendationResponse
+>>>>>>> cc
 }

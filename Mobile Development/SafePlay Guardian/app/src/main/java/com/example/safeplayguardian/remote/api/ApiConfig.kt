@@ -8,7 +8,11 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class ApiConfig {
    companion object {
+<<<<<<< HEAD
       fun getApiService(baseUrl: String): ApiService {
+=======
+      fun getApiService(): ApiService {
+>>>>>>> cc
          val loggingInterceptor =
             HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
          val authInterceptor = Interceptor { chain ->
@@ -22,7 +26,11 @@ class ApiConfig {
             .addInterceptor(authInterceptor)
             .build()
          val retrofit = Retrofit.Builder()
+<<<<<<< HEAD
             .baseUrl(baseUrl)
+=======
+            .baseUrl("https://j2wmr.wiremockapi.cloud/")
+>>>>>>> cc
             .addConverterFactory(GsonConverterFactory.create())
             .client(client)
             .build()
