@@ -6,10 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.safeplayguardian.data.pref.LoginResult
 import com.example.safeplayguardian.data.repository.UserRepository
-<<<<<<< HEAD
 import com.google.firebase.auth.FirebaseAuthException
-=======
->>>>>>> cc
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 
@@ -33,11 +30,7 @@ class LoginViewModel(private val userRepository: UserRepository) : ViewModel() {
                _loginResult.value = LoginResult(uid, email, success = true)
                _isLoading.value = false
             }
-<<<<<<< HEAD
          } catch (e: FirebaseAuthException) {
-=======
-         } catch (e: Exception) {
->>>>>>> cc
             // Kesalahan umum
             _loginResult.value = LoginResult(error = e.localizedMessage ?: "Login failed")
          } finally {
@@ -45,12 +38,7 @@ class LoginViewModel(private val userRepository: UserRepository) : ViewModel() {
          }
       }
    }
-<<<<<<< HEAD
    
-=======
-
-
->>>>>>> cc
    fun saveSession(user: LoginResult) {
       viewModelScope.launch {
          userRepository.saveSession(user)

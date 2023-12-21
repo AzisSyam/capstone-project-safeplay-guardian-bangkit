@@ -20,12 +20,9 @@ class SignUpViewModel(private val repository: UserRepository) : ViewModel() {
    private val _photoName = MutableLiveData<String>()
    val photoName: LiveData<String> get() = _photoName
 
-<<<<<<< HEAD
    private val _isLoading = MutableLiveData<Boolean>()
    val isLoading: LiveData<Boolean> get() = _isLoading
 
-=======
->>>>>>> cc
    fun performSignUp(
       imageUrl: String,
       photoName: String,
@@ -43,41 +40,15 @@ class SignUpViewModel(private val repository: UserRepository) : ViewModel() {
                password = password
             )
             _signUpResult.value = SignUpResult(success = true)
-<<<<<<< HEAD
             _isLoading.value = false
             Log.d("signUpResult", "performSignUp: ${signUpResult} ")
-=======
->>>>>>> cc
          } catch (e: Exception) {
             _signUpResult.value = SignUpResult(error = e.localizedMessage ?: "SignUp failed")
          } finally {
-//            _isLoading.value = false
+            Log.d(SignUpActivity.TAG, "performSignUp: Terjadi kesalahan")
          }
       }
    }
-
-<<<<<<< HEAD
-//   fun uploadImageToStorage(currentImageUri: Uri?) {
-//      viewModelScope.launch {
-//         _isLoading.value = true
-//         try {
-//            if (currentImageUri != null) {
-//               val (imageUrl, photoName) = repository.uploadImageToFirebaseStorage(currentImageUri = currentImageUri!!)
-//
-//               _imageUrl.value = imageUrl
-//               _photoName.value = photoName
-//            } else{
-//               val (imageUrl, photoName) = repository.uploadImageToFirebaseStorage(currentImageUri = null)
-//
-//               _imageUrl.value = imageUrl
-//               _photoName.value = photoName
-//            }
-//
-//         } catch (e: Exception) {
-//            Log.d("Create account", "uploadImageToStorage: ${e.message}")
-//         }
-//      }
-//   }
 
    fun uploadImageToStorage(currentImageUri: Uri? = null) {
       viewModelScope.launch {
@@ -94,19 +65,4 @@ class SignUpViewModel(private val repository: UserRepository) : ViewModel() {
       }
    }
 
-=======
-   fun uploadImageToStorage(currentImageUri: Uri?) {
-      viewModelScope.launch {
-         try {
-            val (imageUrl, photoName) = repository.uploadImageToFirebaseStorage(currentImageUri = currentImageUri!!)
-
-            _imageUrl.value = imageUrl
-            _photoName.value = photoName
-
-         } catch (e: Exception) {
-            Log.d("Create account", "uploadImageToStorage: ${e.message}")
-         }
-      }
-   }
->>>>>>> cc
 }

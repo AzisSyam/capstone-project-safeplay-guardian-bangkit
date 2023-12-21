@@ -7,7 +7,6 @@
     <item name="colorOnSecondary">@color/black</item>
     <item name="colorSecondaryContainer">@color/secondary_container</item>
     <item name="colorAccent">@color/white</item>
-<<<<<<< HEAD
     <item name="colorOnSurface">@color/black</item>
     <item name="colorOnSurfaceVariant">@color/black</item>
   </style>
@@ -15,13 +14,6 @@
   <style name="Base.Theme.SafePlayGuardian.NoactionBar" parent="Theme.Material3.DayNight.NoActionBar">
     <item name="android:statusBarColor">@color/white</item>
     <item name="backgroundTint">@color/white</item>
-=======
-    <item name="colorOnSurface">@color/white</item>
-    <item name="colorOnSurfaceVariant">@color/white</item>
-  </style>
-
-  <style name="Base.Theme.SafePlayGuardian.NoactionBar" parent="Theme.Material3.DayNight.NoActionBar">
->>>>>>> cc
     <item name="colorPrimary">@color/blue_primary</item>
     <item name="colorOnPrimary">@color/white</item>
     <item name="colorSecondary">@color/white</item>
@@ -29,7 +21,6 @@
     <item name="colorAccent">@color/white</item>
     <item name="colorOnSurface">@color/white</item>
     <item name="colorOnSurfaceVariant">@color/white</item>
-<<<<<<< HEAD
     <item name="android:background">@color/white</item>
   </style>
 
@@ -38,14 +29,8 @@
   </style>
 
   <style name="SplahScreenTheme" parent="Base.Theme.SafePlayGuardian.NoactionBar">
-    <item name="android:statusBarColor">@color/blue_primary</item>
-=======
-    <item name="background">@color/white</item>
-  </style>
-
-  <style name="SplashscreenNavigationColor" parent="Base.Theme.SafePlayGuardian.NoactionBar">
->>>>>>> cc
-    <item name="android:navigationBarColor">@color/blue_primary</item>
+    <item name="android:statusBarColor">@color/white</item>
+    <item name="android:navigationBarColor">@color/white</item>
   </style>
 
   <style name="TextAppearance.AppCompat.Widget.ActionBar.Title" parent="@style/TextAppearance.AppCompat">
@@ -71,16 +56,10 @@
 
   <style name="Base.Theme.SafePlayGuardian.BackButtonColor" parent="Widget.Material3.Toolbar">
     <item name="navigationIconTint">@color/black</item>
-<<<<<<< HEAD
     <item name="android:background">@color/white</item>
   </style>
 
   <!--  edit text edit profile-->
-=======
-  </style>
-
-<!--  edit text edit profile-->
->>>>>>> cc
   <style name="ShapeAppearance.App.SmallComponent" parent="ShapeAppearance.Material3.SmallComponent">
     <item name="cornerFamily">rounded</item>
     <item name="cornerSize">16dp</item>

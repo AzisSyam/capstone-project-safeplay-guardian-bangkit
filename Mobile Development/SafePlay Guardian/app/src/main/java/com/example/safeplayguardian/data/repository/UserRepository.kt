@@ -73,11 +73,7 @@ class UserRepository(
       return resultLiveData
    }
 
-<<<<<<< HEAD
    fun performSignup(
-=======
-   suspend fun performSignup(
->>>>>>> cc
       imageUrl: String,
       photoName: String,
       name: String,
@@ -108,11 +104,7 @@ class UserRepository(
                         )
                      }
                      .addOnFailureListener { e ->
-<<<<<<< HEAD
                         Log.d(
-=======
-                        Log.w(
->>>>>>> cc
                            SignUpActivity.TAG,
                            "Error writing document",
                            e
@@ -120,15 +112,10 @@ class UserRepository(
                      }
 
                } else {
-//                  Toast.makeText(this, "Firebase user is null", Toast.LENGTH_SHORT).show()
                   Log.d(SignUpActivity.TAG, "Firebase user is null")
                }
 
             } else {
-<<<<<<< HEAD
-=======
-//               Toast.makeText(this, it.exception.toString(), Toast.LENGTH_SHORT).show()
->>>>>>> cc
                Log.d("Tombol regis ditekan", "onCreate: ${it.exception}")
 
             }
@@ -138,11 +125,7 @@ class UserRepository(
       }
    }
 
-<<<<<<< HEAD
    suspend fun uploadImageToFirebaseStorage(currentImageUri: Uri?): Pair<String, String> {
-=======
-   suspend fun uploadImageToFirebaseStorage(currentImageUri: Uri): Pair<String, String> {
->>>>>>> cc
       return suspendCoroutine { continuation ->
          if (currentImageUri != null) {
             // Pengguna menyertakan file foto
@@ -181,30 +164,16 @@ class UserRepository(
                   imageRef.downloadUrl.addOnSuccessListener { imageUrl ->
                      val photoName = imageRef.name
                      continuation.resume(Pair(imageUrl.toString(), photoName))
-<<<<<<< HEAD
-=======
-
-//                     onSuccess.invoke(imageUrl.toString(), photoName)
->>>>>>> cc
                   }
                }
                .addOnFailureListener { exception ->
                   // Gagal mengunggah gambar
-<<<<<<< HEAD
                   Log.d("upload gambar regis", "$exception")
-=======
-//               Toast.makeText(
-//                  this,
-//                  "Failed to upload image: ${exception.message}",
-//                  Toast.LENGTH_SHORT
-//               ).show()
->>>>>>> cc
                }
          }
 
       }
    }
-
 
    suspend fun logout() {
       userPreferences.logout()

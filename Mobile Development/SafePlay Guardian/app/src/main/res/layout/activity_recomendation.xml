@@ -6,10 +6,7 @@
   android:layout_width="match_parent"
   android:layout_height="match_parent"
   android:layout_gravity="center_vertical"
-<<<<<<< HEAD
   style="@style/ParentBackgroundColor"
-=======
->>>>>>> cc
   tools:context=".ui.recomendation.RecomendationActivity">
 
   <com.google.android.material.appbar.AppBarLayout
@@ -90,9 +87,5 @@
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent"
-<<<<<<< HEAD
     />
-=======
-    app:trackCornerRadius="50dp" />
->>>>>>> cc
 </androidx.constraintlayout.widget.ConstraintLayout>

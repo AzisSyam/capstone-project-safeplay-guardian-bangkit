@@ -6,11 +6,7 @@
   <uses-permission android:name="android.permission.INTERNET" />
   <uses-permission
     android:name="android.permission.READ_EXTERNAL_STORAGE"
-<<<<<<< HEAD
     android:maxSdkVersion="28" />
-=======
-    android:maxSdkVersion="32" />
->>>>>>> cc
 
   <application
     android:allowBackup="true"
@@ -24,33 +20,34 @@
     tools:targetApi="31">
     <activity
       android:name=".ui.signup.SignUpActivity"
-      android:exported="false" />
+      android:exported="false"
+      android:screenOrientation="portrait"
+      />
     <activity
       android:name=".ui.login.LoginActivity"
-      android:exported="false" />
-    <activity
-      android:name=".ui.editprofile.EditProfileActivity"
+      android:screenOrientation="portrait"
+
       android:exported="false" />
     <activity
       android:name=".ui.profile.ProfileActivity"
+      android:screenOrientation="portrait"
       android:exported="false"
       android:parentActivityName=".ui.main.MainActivity"
       />
     <activity
       android:name=".ui.recomendation.RecomendationActivity"
+      android:screenOrientation="portrait"
       android:exported="true" />
     <activity
       android:name=".ui.WelcomeActivity"
+      android:screenOrientation="portrait"
       android:exported="false"
       android:theme="@style/Base.Theme.SafePlayGuardian.NoactionBar" />
     <activity
       android:name=".ui.splachscreen.SplashScreenActivity"
+      android:screenOrientation="portrait"
       android:exported="true"
-<<<<<<< HEAD
       android:theme="@style/SplahScreenTheme">
-=======
-      android:theme="@style/SplashscreenNavigationColor">
->>>>>>> cc
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
 
@@ -59,9 +56,9 @@
     </activity>
     <activity
       android:name=".ui.main.MainActivity"
+      android:screenOrientation="portrait"
       android:exported="true" />
 
-<<<<<<< HEAD
     <provider
       android:name="androidx.core.content.FileProvider"
       android:authorities="${applicationId}.fileprovider"
@@ -72,8 +69,6 @@
         android:resource="@xml/file_paths"/>
     </provider>
 
-=======
->>>>>>> cc
     <meta-data
       android:name="preloaded_fonts"
       android:resource="@array/preloaded_fonts" />

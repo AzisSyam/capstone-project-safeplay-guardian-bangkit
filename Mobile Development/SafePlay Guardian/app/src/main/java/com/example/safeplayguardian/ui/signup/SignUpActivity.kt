@@ -6,36 +6,17 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
-<<<<<<< HEAD
-=======
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.Button
-import android.widget.Toast
-import androidx.activity.result.PickVisualMediaRequest
-import androidx.activity.result.contract.ActivityResultContracts
->>>>>>> cc
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.safeplayguardian.R
 import com.example.safeplayguardian.ViewModelFactory
 import com.example.safeplayguardian.databinding.ActivitySignUpBinding
 import com.example.safeplayguardian.ui.login.LoginActivity
-<<<<<<< HEAD
 import com.example.safeplayguardian.utils.DialogHelper
 import com.google.android.material.snackbar.Snackbar
 
 class SignUpActivity : AppCompatActivity(), OnImageSelectedListener {
    private lateinit var binding: ActivitySignUpBinding
-=======
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-
-class SignUpActivity : AppCompatActivity(), OnImageSelectedListener {
-   private lateinit var binding: ActivitySignUpBinding
-
-   //   private lateinit var firebaseAuth: FirebaseAuth
->>>>>>> cc
    private var currentImageUri: Uri? = null
 
    private val viewModel by viewModels<SignUpViewModel> {
@@ -67,7 +48,6 @@ class SignUpActivity : AppCompatActivity(), OnImageSelectedListener {
             val name = binding.etName.text.toString().trim()
             val email = binding.etEmail.text.toString().trim()
             val password = binding.etPassword.text.toString()
-<<<<<<< HEAD
             val passwordConfirm = binding.etPasswordConfirm.text.toString()
             if (name.isNotEmpty() && email.isNotEmpty() && password.isNotEmpty()) {
                if (passwordConfirm == password) {
@@ -89,26 +69,6 @@ class SignUpActivity : AppCompatActivity(), OnImageSelectedListener {
                         )
                      }
 
-=======
-            if (name.isNotEmpty() && email.isNotEmpty() && password.isNotEmpty()) {
-               var imageUrl: String? = null
-               var photoName: String? = null
-
-               viewModel.uploadImageToStorage(currentImageUri)
-               viewModel.photoName.observe(this) {
-                  photoName = it
-               }
-               viewModel.imageUrl.observe(this) {
-//                  imageUrl = it
-                  if (imageUrl != null) {
-                     viewModel.performSignUp(
-                        imageUrl = imageUrl,
-                        photoName = photoName!!,
-                        name = name,
-                        password = password,
-                        email = email
-                     )
->>>>>>> cc
                      viewModel.signUpResult.observe(this) { signUpResult ->
                         if (signUpResult.success) {
                            val intent = Intent(this, LoginActivity::class.java)
@@ -117,7 +77,6 @@ class SignUpActivity : AppCompatActivity(), OnImageSelectedListener {
                         }
                      }
                   }
-<<<<<<< HEAD
                } else {
                   Snackbar.make(
                      binding.signupLayout,
@@ -131,29 +90,10 @@ class SignUpActivity : AppCompatActivity(), OnImageSelectedListener {
                   R.string.form_empty_message,
                   Snackbar.LENGTH_LONG
                ).show()
-=======
-
-
-               }
-
-//               viewModel.performSignUp(
-//                  imageUrl = imageUrl!!,
-//                  photoName = photoName!!,
-//                  name = name,
-//                  password = password,
-//                  email = email
-//               )
-
-
-            } else {
-               Toast.makeText(this, getString(R.string.form_empty_message), Toast.LENGTH_SHORT)
-                  .show()
->>>>>>> cc
             }
          } catch (e: Exception) {
             Log.d(TAG, "error: ${e.message}")
          }
-<<<<<<< HEAD
 
       }
 
@@ -163,119 +103,6 @@ class SignUpActivity : AppCompatActivity(), OnImageSelectedListener {
       }
    }
 
-=======
-      }
-   }
-
-//   private fun performSignup(imageUrl: String, photoName: String) {
-//      try {
-//         firebaseAuth = FirebaseAuth.getInstance()
-//
-//         val name = binding.etName.text.toString()
-//         val email = binding.etEmail.text.toString()
-//         val password = binding.etPassword.text.toString()
-//
-//         if (name.isNotEmpty() && email.isNotEmpty() && password.isNotEmpty()) {
-//            val user = firebaseAuth.createUserWithEmailAndPassword(email, password)
-//
-//            user.addOnCompleteListener {
-//               if (it.isSuccessful) {
-//                  val firebaseUser = it.result?.user
-//                  if (firebaseUser != null) {
-//                     val db = Firebase.firestore
-//                     val user = hashMapOf(
-//                        "email" to email,
-//                        "name" to name,
-//                        "photoUrl" to imageUrl,
-//                        "fotoName" to photoName
-//                     )
-//
-//                     db.collection("users").document(firebaseUser.uid)
-//                        .set(user)
-//                        .addOnSuccessListener {
-//                           Log.d(
-//                              TAG,
-//                              "DocumentSnapshot successfully written!"
-//                           )
-//                        }
-//                        .addOnFailureListener { e -> Log.w(TAG, "Error writing document", e) }
-//
-//                     val intent = Intent(this@SignUpActivity, LoginActivity::class.java)
-//                     startActivity(intent)
-//                  } else {
-//                     Toast.makeText(this, "Firebase user is null", Toast.LENGTH_SHORT).show()
-//                     Log.d(TAG, "Firebase user is null")
-//                  }
-//
-//               } else {
-//                  Toast.makeText(this, it.exception.toString(), Toast.LENGTH_SHORT).show()
-//                  Log.d("Tombol regis ditekan", "onCreate: ${it.exception}")
-//
-//               }
-//            }
-//         } else {
-//            Toast.makeText(this, getString(R.string.form_empty_message), Toast.LENGTH_SHORT)
-//               .show()
-//         }
-//      } catch (e: Exception) {
-//         Log.d("Tombol regis ditekan", "onCreate: ${e.message}")
-//      }
-//   }
-//
-//   private fun uploadImageToFirebaseStorage(onSuccess: (String, String) -> Unit) {
-//      if (currentImageUri != null) {
-//         // Pengguna menyertakan file foto
-//         val storageReference = FirebaseStorage.getInstance().reference
-//         val imageRef = storageReference.child("profile_images/${System.currentTimeMillis()}.jpg")
-//
-//         imageRef.putFile(currentImageUri!!)
-//            .addOnSuccessListener {
-//               // Gambar berhasil diunggah, dapatkan URL gambar
-//               imageRef.downloadUrl.addOnSuccessListener { imageUrl ->
-//                  val photoName = imageRef.name
-//                  onSuccess.invoke(imageUrl.toString(), photoName)
-//               }
-//            }
-//            .addOnFailureListener { exception ->
-//               // Gagal mengunggah gambar
-//               Toast.makeText(
-//                  this,
-//                  "Gagal mengunggah gambar ${exception.message}",
-//                  Toast.LENGTH_SHORT
-//               ).show()
-//            }
-//      } else {
-//         // Pengguna tidak menyertakan file foto, gunakan gambar dari Drawable
-//         val storageReference = FirebaseStorage.getInstance().reference
-//         val drawable = ContextCompat.getDrawable(this, R.drawable.user)
-//         val bitmap = (drawable as BitmapDrawable).bitmap
-//
-//         val baos = ByteArrayOutputStream()
-//         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
-//         val data = baos.toByteArray()
-//
-//         val imageRef = storageReference.child("profile_images/${System.currentTimeMillis()}.jpg")
-//
-//         imageRef.putBytes(data)
-//            .addOnSuccessListener {
-//               // Gambar dari Drawable berhasil diunggah, dapatkan URL gambar
-//               imageRef.downloadUrl.addOnSuccessListener { imageUrl ->
-//                  val photoName = imageRef.name
-//                  onSuccess.invoke(imageUrl.toString(), photoName)
-//               }
-//            }
-//            .addOnFailureListener { exception ->
-//               // Gagal mengunggah gambar
-//               Toast.makeText(
-//                  this,
-//                  "Failed to upload image: ${exception.message}",
-//                  Toast.LENGTH_SHORT
-//               ).show()
-//            }
-//      }
-//   }
-
->>>>>>> cc
    private fun showBottomSheet() {
       val modalBottomSheet = ModalBottomSheet()
       modalBottomSheet.setOnImageSelectedListener(this)
@@ -287,11 +114,7 @@ class SignUpActivity : AppCompatActivity(), OnImageSelectedListener {
       showImage()
    }
 
-<<<<<<< HEAD
    fun showImage() {
-=======
-   private fun showImage() {
->>>>>>> cc
       currentImageUri?.let {
          Log.d("Image URI", "showImage: $it")
          binding.profilePhoto.setImageURI(it)
@@ -310,11 +133,7 @@ class SignUpActivity : AppCompatActivity(), OnImageSelectedListener {
          override fun afterTextChanged(s: Editable?) {
             val email = s.toString()
             if (!isEmailValid(email)) {
-<<<<<<< HEAD
                val message = "Format email tidak valid"
-=======
-               val message= "Format email tidak valid"
->>>>>>> cc
                binding.etEmail.setError(message, null)
             }
          }
@@ -344,141 +163,7 @@ class SignUpActivity : AppCompatActivity(), OnImageSelectedListener {
       })
    }
 
-   // fragment upload photo profile
-<<<<<<< HEAD
-   /*
-      class ModalBottomSheet : BottomSheetDialogFragment() {
-         private var currentImageUri: Uri? = null
-         private var onImageSelectedListener: OnImageSelectedListener? = null
-         private lateinit var signUpActivity: SignUpActivity
-
-         override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
-         ): View? {
-            val rootView = inflater.inflate(R.layout.modal_bottom_sheet_content, container, false)
-            val btnCamera: Button = rootView.findViewById(R.id.btn_camera_bottom_sheet)
-            val btnGallery: Button = rootView.findViewById(R.id.btn_galeri_bottom_sheet)
-
-            signUpActivity = SignUpActivity()
-
-            // Tambahkan onClickListener untuk tombol-tombol di Bottom Sheet
-            btnCamera.setOnClickListener {
-               // Tambahkan logika untuk aksi kamera
-               startCamera()
-            }
-
-            btnGallery.setOnClickListener {
-               // Tambahkan logika untuk aksi galeri
-               startGallery()
-            }
-
-            return rootView
-         }
-
-         //gallery
-         private fun startGallery() {
-            launcherGallery.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
-         }
-
-         private fun startCamera() {
-            try {
-               currentImageUri = getImageUri(requireContext())
-               launcherIntentCamera.launch(currentImageUri)
-            } catch (e: Exception) {
-               Log.d(TAG, "startCamera: ${e.message}")
-            }
-         }
-
-         private val launcherGallery = registerForActivityResult(
-            ActivityResultContracts.PickVisualMedia()
-         ) { uri: Uri? ->
-            if (uri != null) {
-               currentImageUri = uri
-               signUpActivity.showImage()
-               onImageSelectedListener?.onImageSelected(currentImageUri!!)
-            } else {
-               Log.d("Photo Picker", "No media selected")
-            }
-         }
-
-         private val launcherIntentCamera = registerForActivityResult(
-            ActivityResultContracts.TakePicture()
-         ) { isSuccess ->
-            if (isSuccess) {
-               signUpActivity.showImage()
-               onImageSelectedListener?.onImageSelected(currentImageUri!!)
-            }
-         }
-
-         fun setOnImageSelectedListener(listener: OnImageSelectedListener) {
-            onImageSelectedListener = listener
-         }
-      }
-   */
-=======
-   class ModalBottomSheet : BottomSheetDialogFragment() {
-      private var currentImageUri: Uri? = null
-      private var onImageSelectedListener: OnImageSelectedListener? = null
-      private lateinit var signUpActivity: SignUpActivity
-
-      override fun onCreateView(
-         inflater: LayoutInflater,
-         container: ViewGroup?,
-         savedInstanceState: Bundle?
-      ): View? {
-         val rootView = inflater.inflate(R.layout.modal_bottom_sheet_content, container, false)
-         val btnCamera: Button = rootView.findViewById(R.id.btn_camera_bottom_sheet)
-         val btnGallery: Button = rootView.findViewById(R.id.btn_galeri_bottom_sheet)
-
-         signUpActivity = SignUpActivity()
-
-         // Tambahkan onClickListener untuk tombol-tombol di Bottom Sheet
-         btnCamera.setOnClickListener {
-            // Tambahkan logika untuk aksi kamera
-            Toast.makeText(requireContext(), "Kamera dipilih", Toast.LENGTH_SHORT).show()
-         }
-
-         btnGallery.setOnClickListener {
-            // Tambahkan logika untuk aksi galeri
-            startGallery()
-         }
-
-         return rootView
-      }
-
-      //gallery
-      private fun startGallery() {
-         launcherGallery.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
-      }
-
-      private val launcherGallery = registerForActivityResult(
-         ActivityResultContracts.PickVisualMedia()
-      ) { uri: Uri? ->
-         if (uri != null) {
-            currentImageUri = uri
-            signUpActivity.showImage()
-            onImageSelectedListener?.onImageSelected(currentImageUri!!)
-         } else {
-            Log.d("Photo Picker", "No media selected")
-         }
-      }
-
-      fun setOnImageSelectedListener(listener: OnImageSelectedListener) {
-         onImageSelectedListener = listener
-      }
-   }
->>>>>>> cc
-
    companion object {
       const val TAG = "SignUpActivity"
    }
 }
-<<<<<<< HEAD
-=======
-
-interface OnImageSelectedListener {
-   fun onImageSelected(imageUri: Uri)
-}
->>>>>>> cc

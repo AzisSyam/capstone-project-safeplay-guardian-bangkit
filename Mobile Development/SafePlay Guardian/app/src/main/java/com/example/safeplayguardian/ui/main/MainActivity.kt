@@ -1,7 +1,6 @@
 package com.example.safeplayguardian.ui.main
 
 import android.content.Intent
-<<<<<<< HEAD
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -10,6 +9,7 @@ import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.example.safeplayguardian.R
 import com.example.safeplayguardian.ViewModelFactory
@@ -19,8 +19,12 @@ import com.example.safeplayguardian.ui.profile.ProfileActivity
 import com.example.safeplayguardian.ui.recomendation.RecomendationActivity
 import com.example.safeplayguardian.utils.DialogHelper
 import com.example.safeplayguardian.utils.getImageUri
+import com.example.safeplayguardian.utils.reduceFileImage
 import com.example.safeplayguardian.utils.uriToFile
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
@@ -30,23 +34,6 @@ class MainActivity : AppCompatActivity() {
    private lateinit var userId: String
    private var currentImageUri: Uri? = null
 
-=======
-import android.os.Bundle
-import android.util.Log
-import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
-import com.bumptech.glide.Glide
-import com.example.safeplayguardian.ViewModelFactory
-import com.example.safeplayguardian.databinding.ActivityMainBinding
-import com.example.safeplayguardian.ui.login.LoginActivity
-import com.example.safeplayguardian.ui.profile.ProfileActivity
-import com.example.safeplayguardian.ui.recomendation.RecomendationActivity
-
-class MainActivity : AppCompatActivity() {
-   private lateinit var binding: ActivityMainBinding
-   private lateinit var userPhotoUrl: String
-   private lateinit var userId: String
->>>>>>> cc
 
    private val viewModel by viewModels<MainViewModel> {
       ViewModelFactory.getInstance(this)
@@ -57,7 +44,6 @@ class MainActivity : AppCompatActivity() {
       binding = ActivityMainBinding.inflate(layoutInflater)
       setContentView(binding.root)
 
-<<<<<<< HEAD
       viewModel.getSession().observe(this) { user ->
          if (user.userId == "") {
             startActivity(Intent(this, WelcomeActivity::class.java))
@@ -68,18 +54,16 @@ class MainActivity : AppCompatActivity() {
 
          viewModel.getUserData(userId = userId)
 
-         viewModel.userData.observe(this) { user ->
-            val userPhotoUrl = user.photoUrl
+         viewModel.userData.observe(this) {
+            val userPhotoUrl = it?.photoUrl
             if (userPhotoUrl != null) loadUserProfilePhoto(userPhotoUrl)
          }
 
-         viewModel.error.observe(this) { errorMessage ->
+         viewModel.errorResponse.observe(this) { errorMessage ->
             Log.d(TAG, "Error fetching user data: $errorMessage")
          }
       }
 
-=======
->>>>>>> cc
       binding.btnRecomendation.setOnClickListener {
          val intent = Intent(this@MainActivity, RecomendationActivity::class.java)
          startActivity(intent)
@@ -91,7 +75,6 @@ class MainActivity : AppCompatActivity() {
          startActivity(intent)
       }
 
-<<<<<<< HEAD
       binding.btnCamera.setOnClickListener {
          startCamera()
       }
@@ -101,14 +84,14 @@ class MainActivity : AppCompatActivity() {
       }
 
       binding.btnCheck.setOnClickListener {
-         currentImageUri.let {
-            startClassification()
-         }
+         startClassification()
       }
 
       viewModel.isLoading.observe(this) {
          showLoading(it)
          binding.btnCheck.isClickable = !it
+         binding.btnGallery.isClickable = !it
+         binding.btnCamera.isClickable = !it
       }
 
       viewModel.errorResponse.observe(this) { errorMessage ->
@@ -125,43 +108,10 @@ class MainActivity : AppCompatActivity() {
       } else {
          binding.toysImage.alpha = 1f
          binding.classificationProgressbar.visibility = View.GONE
-=======
-//      firebaseAuth = Firebase.auth
-//      val firebaseUser = firebaseAuth.currentUser
-
-      viewModel.getSession().observe(this) { user ->
-         if (user.userId == "") {
-            startActivity(Intent(this, LoginActivity::class.java))
-            finish()
-         }
-
-         userId = user.userId!!
-
-         viewModel.getUserData(userId = userId)
-
-         viewModel.userData.observe(this) { user ->
-            val userPhotoUrl = user.photoUrl
-            if (userPhotoUrl != null) loadUserProfilePhoto(userPhotoUrl)
-         }
-
-         viewModel.error.observe(this){errorMessage->
-            Log.d(TAG, "Error fetching user data: $errorMessage")
-         }
-
-//         FirebaseManager.getUserData(userId,
-//            onSuccess = { user ->
-//               userPhotoUrl = user.photoUrl.toString()
-//               loadUserProfilePhoto(userPhotoUrl)
-//            },
-//            onFailure = { exception ->
-//               Log.d(TAG, "Error fetching user data: ${exception.message}")
-//            }
-//         )
->>>>>>> cc
       }
    }
 
-   private fun loadUserProfilePhoto(userPhotoUrl: String) {
+   private fun loadUserProfilePhoto(userPhotoUrl: String?) {
       if (userPhotoUrl != null) {
          Glide.with(binding.userPhoto)
             .load(userPhotoUrl)
@@ -170,34 +120,78 @@ class MainActivity : AppCompatActivity() {
       }
    }
 
-<<<<<<< HEAD
    private fun startClassification() {
       try {
          currentImageUri?.let { uri ->
             val imageFile = uriToFile(uri, this)
-            val requestImageFile = imageFile.asRequestBody("image/jpeg".toMediaType())
-            val file = MultipartBody.Part.createFormData(
-               "file",
-               imageFile.name,
-               requestImageFile
-            )
-            viewModel.startClassification(file)
-            viewModel.classificationData.observe(this) { result ->
-               binding.tvToysName.text = result?.toyName
-               binding.tvToysDesc.text = result?.description
+//            if (imageFile.length() > 5 * 1024 * 1024) {
+//               Snackbar.make(
+//                  binding.mainView,
+//                  getString(R.string.max_size_file_info),
+//                  Snackbar.LENGTH_LONG
+//               )
+//                  .show()
+//            } else {
+            showLoading(true)
+            lifecycleScope.launch(Dispatchers.Main) {
+               try {
+                  binding.btnCheck.isClickable = false
+                  val reducedImageFile = withContext(Dispatchers.IO) {
+                     imageFile.reduceFileImage()
+                  }
+
+                  val requestImageFile =
+                     reducedImageFile.asRequestBody("image/jpeg".toMediaType())
+
+                  val file = MultipartBody.Part.createFormData(
+                     "file",
+                     reducedImageFile.name,
+                     requestImageFile
+                  )
+
+                  viewModel.startClassification(file, this@MainActivity)
+
+                  viewModel.classificationData.observe(this@MainActivity) { result ->
+                     if (result != null){
+                        binding.tvToysName.text = result?.toyName
+                        binding.tvToysDesc.text = result?.description
+                        val scrollY = binding.resultContainer.top
+                        binding.mainView.smoothScrollTo(0, scrollY)
+                     }
+                  }
+               } catch (e: Exception) {
+                  e.printStackTrace()
+               }
             }
+
          } ?: run {
-            Snackbar.make(binding.mainView, getString(R.string.image_not_found), Snackbar.LENGTH_LONG).show()
+            Snackbar.make(
+               binding.mainView,
+               getString(R.string.image_not_found),
+               Snackbar.LENGTH_LONG
+            ).show()
          }
       } catch (e: Exception) {
-         Snackbar.make(binding.mainView, getString(R.string.image_not_found), Snackbar.LENGTH_LONG).show()
+         Snackbar.make(binding.mainView, getString(R.string.image_not_found), Snackbar.LENGTH_LONG)
+            .show()
          Log.d(TAG, "${e.message}")
       }
    }
 
    private fun showImage() {
-      currentImageUri?.let {
-         binding.toysImage.setImageURI(it)
+      currentImageUri?.let { uri ->
+         val imageFile = uriToFile(uri, this)
+         if (imageFile.length() > 6 * 1024 * 1024) {
+            Snackbar.make(
+               binding.mainView,
+               getString(R.string.max_size_file_info),
+               Snackbar.LENGTH_LONG
+            )
+               .show()
+            currentImageUri = null
+         } else {
+            binding.toysImage.setImageURI(uri)
+         }
       }
    }
 
@@ -225,9 +219,7 @@ class MainActivity : AppCompatActivity() {
       }
    }
 
-=======
->>>>>>> cc
    companion object {
-      private const val TAG = "MainActivity"
+      const val TAG = "MainActivity"
    }
 }

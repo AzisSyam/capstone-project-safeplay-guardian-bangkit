@@ -7,40 +7,25 @@
     <item name="colorOnSecondary">@color/black</item>
     <item name="colorSecondaryContainer">@color/secondary_container</item>
     <item name="colorOnSurface">@color/white</item>
-<<<<<<< HEAD
-=======
-    <!--&lt;!&ndash;    font&ndash;&gt;
-    <item name="android:typeface">@font/quicksand</item>-->
->>>>>>> cc
   </style>
 
   <style name="Base.Theme.SafePlayGuardian.NoactionBar" parent="Theme.Material3.DayNight.NoActionBar">
     <item name="colorPrimary">@color/blue_primary</item>
-<<<<<<< HEAD
     <item name="android:statusBarColor">@color/dark_grey</item>
-=======
->>>>>>> cc
     <item name="colorOnPrimary">@color/white</item>
     <item name="colorOnSecondary">@color/black</item>
     <item name="colorSecondaryContainer">@color/secondary_container</item>
   </style>
 
-<<<<<<< HEAD
   <style name="SplahScreenTheme" parent="Base.Theme.SafePlayGuardian.NoactionBar">
-    <item name="android:statusBarColor">@color/blue_primary</item>
-    <item name="android:navigationBarColor">@color/blue_primary</item>
+    <item name="android:statusBarColor">@color/dark_grey</item>
+    <item name="android:navigationBarColor">@color/dark_grey</item>
   </style>
 
   <style name="ParentBackgroundColor" parent="Base.Theme.SafePlayGuardian">
     <item name="android:background">@color/dark_grey</item>
   </style>
 
-=======
-  <style name="SplashscreenNavigationColor" parent="Base.Theme.SafePlayGuardian.NoactionBar">
-    <item name="android:navigationBarColor">@color/blue_primary</item>
-  </style>
-
->>>>>>> cc
   <style name="TextField.StartIcon" parent="Widget.Material3.TextInputLayout.OutlinedBox">
     <item name="startIconTint">?attr/colorOutline</item>
   </style>
@@ -51,10 +36,7 @@
 
   <style name="Base.Theme.SafePlayGuardian.BackButtonColor" parent="Widget.Material3.Toolbar">
     <item name="navigationIconTint">@color/white</item>
-<<<<<<< HEAD
     <item name="android:background">@color/dark_grey</item>
-=======
->>>>>>> cc
   </style>
 
   <!--  edit text edit profile-->
