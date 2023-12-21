@@ -14,12 +14,6 @@ interface ApiService {
    @GET("recomendation")
    fun getRecomendation(): Call<ToysRecomendationResponse>
 
-//   @Multipart
-//   @POST("predict")
-//   suspend fun startClassification(
-//      @Part file: MultipartBody.Part
-//   ): ClassificationResponse
-
    @Multipart
    @POST("predict")
    fun startClassification(

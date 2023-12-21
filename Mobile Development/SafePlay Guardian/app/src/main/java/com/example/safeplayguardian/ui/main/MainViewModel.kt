@@ -49,27 +49,6 @@ class MainViewModel(
       return userRepository.getSession().asLiveData()
    }
 
-   /*
-      fun startClassification(file: MultipartBody.Part, context: Context) {
-   //      _isLoading.value = true
-   ////      viewModelScope.launch {
-   ////         try {
-   ////            val response = classificationRepository.startClassification(file)
-   ////            _classificationResponse.value = response.result
-   ////            _isLoading.value = false
-   ////         } catch (e: HttpException) {
-   ////            val errorBody = e.response()?.errorBody()?.string()
-   ////            val errorResponse = Gson().fromJson(errorBody, ToysRecomendationResponse::class.java)
-   ////            _errorResponse.value = errorResponse.toString()
-   ////            _isLoading.value = false
-   ////         } catch (e: IOException){
-   ////            _errorResponse.value = context.getString(R.string.classification_failed)
-   ////            _isLoading.value = false
-   ////         }
-   ////      }
-      }
-   */
-
    fun startClassification(file: MultipartBody.Part, context: Context) {
       _isLoading.value = true
 
