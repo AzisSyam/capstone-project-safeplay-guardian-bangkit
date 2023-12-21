@@ -19,7 +19,7 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
-private const val MAXIMAL_SIZE = 1000000 //1 MB
+private const val MAXIMAL_SIZE = 1500000 //1 MB
 private const val FILENAME_FORMAT = "yyyyMMdd_HHmmss"
 private val timeStamp: String = SimpleDateFormat(FILENAME_FORMAT, Locale.US).format(Date())
 
@@ -70,7 +70,6 @@ fun Bitmap.getRotatedBitmap(file: File): Bitmap? {
    }
 }
 
-
 fun isNetworkAvailable(context: Context): Boolean {
    val connectivityManager =
       context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
@@ -80,7 +79,7 @@ fun isNetworkAvailable(context: Context): Boolean {
 
 object DialogHelper {
    fun showLoading(isLoading: Boolean, progressBar: ProgressBar) {
-      progressBar.visibility = if (isLoading == true) View.VISIBLE else View.GONE
+      progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
    }
 
    fun showAlert(

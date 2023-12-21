@@ -29,8 +29,8 @@
   </style>
 
   <style name="SplahScreenTheme" parent="Base.Theme.SafePlayGuardian.NoactionBar">
-    <item name="android:statusBarColor">@color/blue_primary</item>
-    <item name="android:navigationBarColor">@color/blue_primary</item>
+    <item name="android:statusBarColor">@color/white</item>
+    <item name="android:navigationBarColor">@color/white</item>
   </style>
 
   <style name="TextAppearance.AppCompat.Widget.ActionBar.Title" parent="@style/TextAppearance.AppCompat">

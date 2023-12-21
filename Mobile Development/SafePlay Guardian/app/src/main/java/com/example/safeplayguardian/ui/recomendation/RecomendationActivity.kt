@@ -11,6 +11,7 @@ import com.example.safeplayguardian.ViewModelFactory
 import com.example.safeplayguardian.databinding.ActivityRecomendationBinding
 import com.example.safeplayguardian.remote.response.ListToyItem
 import com.example.safeplayguardian.ui.adapter.ToysAdapter
+import com.example.safeplayguardian.utils.DialogHelper
 import com.example.safeplayguardian.utils.isNetworkAvailable
 import com.google.android.material.snackbar.Snackbar
 import retrofit2.HttpException
@@ -62,8 +63,9 @@ class RecomendationActivity : AppCompatActivity() {
 
             viewModel.errorResponse.observe(this){
                if (it.isNotEmpty()){
-                  binding.tvToyNotFound.visibility = View.GONE
-                  binding.btnRetry.visibility = View.GONE
+                  binding.tvToyNotFound.visibility = View.VISIBLE
+                  binding.btnRetry.visibility = View.VISIBLE
+                  DialogHelper.showAlertWithoutNegativeButton(it, this)
                }
             }
          } catch (e: HttpException) {

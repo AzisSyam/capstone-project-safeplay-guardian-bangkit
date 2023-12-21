@@ -9,8 +9,7 @@ import com.example.safeplayguardian.ui.main.MainActivity
 
 class SplashScreenActivity : AppCompatActivity() {
    // Waktu penundaan (dalam milidetik) sebelum beralih ke layar utama
-   private val SPLASH_DELAY: Long = 2000 
-
+   private val SPLASH_DELAY: Long = 2000
    override fun onCreate(savedInstanceState: Bundle?) {
       super.onCreate(savedInstanceState)
       setContentView(R.layout.activity_splash_screen)

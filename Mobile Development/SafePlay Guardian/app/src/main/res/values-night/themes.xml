@@ -18,8 +18,8 @@
   </style>
 
   <style name="SplahScreenTheme" parent="Base.Theme.SafePlayGuardian.NoactionBar">
-    <item name="android:statusBarColor">@color/blue_primary</item>
-    <item name="android:navigationBarColor">@color/blue_primary</item>
+    <item name="android:statusBarColor">@color/dark_grey</item>
+    <item name="android:navigationBarColor">@color/dark_grey</item>
   </style>
 
   <style name="ParentBackgroundColor" parent="Base.Theme.SafePlayGuardian">

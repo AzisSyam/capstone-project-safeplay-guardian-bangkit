@@ -27,7 +27,6 @@ class ProfileActivity : AppCompatActivity() {
 
       val toolbar: Toolbar = binding.topAppBar
       setSupportActionBar(toolbar)
-//      supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
       val intent = intent
       val userId = intent.getStringExtra("userId")
@@ -50,12 +49,6 @@ class ProfileActivity : AppCompatActivity() {
          // Handle navigation icon press
          onBackPressed()
       }
-
-//      binding.btnEditProfile.setOnClickListener {
-//         val intent = Intent(this@ProfileActivity, EditProfileActivity::class.java)
-//         intent.putExtra("userId", userId)
-//         startActivity(intent)
-//      }
 
       binding.btnLogout.setOnClickListener {
          DialogHelper.showAlert(getString(R.string.logout_confirm), this) {

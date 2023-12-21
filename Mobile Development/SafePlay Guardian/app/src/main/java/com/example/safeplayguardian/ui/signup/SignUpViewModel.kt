@@ -45,32 +45,10 @@ class SignUpViewModel(private val repository: UserRepository) : ViewModel() {
          } catch (e: Exception) {
             _signUpResult.value = SignUpResult(error = e.localizedMessage ?: "SignUp failed")
          } finally {
-//            _isLoading.value = false
+            Log.d(SignUpActivity.TAG, "performSignUp: Terjadi kesalahan")
          }
       }
    }
-
-//   fun uploadImageToStorage(currentImageUri: Uri?) {
-//      viewModelScope.launch {
-//         _isLoading.value = true
-//         try {
-//            if (currentImageUri != null) {
-//               val (imageUrl, photoName) = repository.uploadImageToFirebaseStorage(currentImageUri = currentImageUri!!)
-//
-//               _imageUrl.value = imageUrl
-//               _photoName.value = photoName
-//            } else{
-//               val (imageUrl, photoName) = repository.uploadImageToFirebaseStorage(currentImageUri = null)
-//
-//               _imageUrl.value = imageUrl
-//               _photoName.value = photoName
-//            }
-//
-//         } catch (e: Exception) {
-//            Log.d("Create account", "uploadImageToStorage: ${e.message}")
-//         }
-//      }
-//   }
 
    fun uploadImageToStorage(currentImageUri: Uri? = null) {
       viewModelScope.launch {

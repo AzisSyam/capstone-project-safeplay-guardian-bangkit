@@ -112,7 +112,6 @@ class UserRepository(
                      }
 
                } else {
-//                  Toast.makeText(this, "Firebase user is null", Toast.LENGTH_SHORT).show()
                   Log.d(SignUpActivity.TAG, "Firebase user is null")
                }
 
@@ -175,7 +174,6 @@ class UserRepository(
 
       }
    }
-
 
    suspend fun logout() {
       userPreferences.logout()
